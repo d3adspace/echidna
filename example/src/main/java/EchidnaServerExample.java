@@ -46,7 +46,6 @@ import java.util.Collections;
 public class EchidnaServerExample {
 	
 	public static void main(String[] args) {
-		
 		EchidnaConfig config = new EchidnaConfigBuilder()
 			.setServerPort(80)
 			.setServerHost("localhost")
