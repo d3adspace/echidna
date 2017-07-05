@@ -75,6 +75,7 @@ public static class ExampleResource {
 			.setHeaders(new HTTPHeaders())
 			.createHTTPResponse();
 	}
+}
 ```
 
 _Client Example:_
