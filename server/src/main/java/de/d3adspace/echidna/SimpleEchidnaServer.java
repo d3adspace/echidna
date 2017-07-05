@@ -36,6 +36,8 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.ServerChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Basic Server implementation.
@@ -48,6 +50,11 @@ public class SimpleEchidnaServer implements EchidnaServer {
 	 * Manager for all resources.
 	 */
 	private final ResourceManager resourceManager;
+	
+	/**
+	 * Logger for server actions.
+	 */
+	private final Logger logger;
 	
 	/**
 	 * Config for the server.
@@ -76,6 +83,7 @@ public class SimpleEchidnaServer implements EchidnaServer {
 	 */
 	SimpleEchidnaServer(EchidnaConfig config) {
 		this.resourceManager = new ResourceManager(config);
+		this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
 		this.config = config;
 	}
 	
@@ -85,6 +93,9 @@ public class SimpleEchidnaServer implements EchidnaServer {
 		this.workerGroup = NettyUtils.createEventLoopGroup(4);
 		
 		Class<? extends ServerChannel> serverChannelClass = NettyUtils.getServerChannelClass();
+		
+		this.logger.info("I am going to start a server on {}:{}.", this.config.getServerHost(),
+			this.config.getServerPort());
 		
 		ServerBootstrap serverBootstrap = new ServerBootstrap();
 		try {
@@ -98,14 +109,21 @@ public class SimpleEchidnaServer implements EchidnaServer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		this.logger.info("Started the server on {}:{}.", this.config.getServerHost(),
+			this.config.getServerPort());
 	}
 	
 	@Override
 	public void stop() {
+		this.logger.info("Server is going to stop.");
+		
 		this.channel.close();
 		
 		this.bossGroup.shutdownGracefully();
 		this.workerGroup.shutdownGracefully();
+		
+		this.logger.info("Server stopped.");
 	}
 	
 	@Override
