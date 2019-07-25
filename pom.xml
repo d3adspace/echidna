@@ -43,7 +43,6 @@
     <module>server</module>
     <module>commons</module>
     <module>example</module>
-    <module>client</module>
   </modules>
   <packaging>pom</packaging>
 
