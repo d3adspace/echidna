@@ -21,21 +21,7 @@
 
 package de.d3adspace.echidna;
 
-import de.d3adspace.echidna.commons.NettyUtils;
-import de.d3adspace.echidna.commons.http.HTTPBody;
-import de.d3adspace.echidna.commons.http.HTTPHeaders;
-import de.d3adspace.echidna.commons.http.HTTPRequest;
-import de.d3adspace.echidna.commons.http.HTTPResponse;
-import de.d3adspace.echidna.commons.http.HTTPStatus;
 import de.d3adspace.echidna.config.EchidnaConfig;
-import de.d3adspace.echidna.initializer.ServerChannelInitializer;
-import de.d3adspace.echidna.resource.Resource;
-import de.d3adspace.echidna.resource.ResourceManager;
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.ServerChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,11 +31,6 @@ import org.slf4j.LoggerFactory;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class SimpleEchidnaServer implements EchidnaServer {
-
-  /**
-   * Manager for all resources.
-   */
-  private final ResourceManager resourceManager;
 
   /**
    * Logger for server actions.
@@ -62,53 +43,18 @@ public class SimpleEchidnaServer implements EchidnaServer {
   private EchidnaConfig config;
 
   /**
-   * Netty boss group.
-   */
-  private EventLoopGroup bossGroup;
-
-  /**
-   * Netty worker group.
-   */
-  private EventLoopGroup workerGroup;
-
-  /**
-   * Channel to client.
-   */
-  private Channel channel;
-
-  /**
    * Create a new Echidna server.
    *
    * @param config The server config.
    */
   SimpleEchidnaServer(EchidnaConfig config) {
-    this.resourceManager = new ResourceManager(config);
     this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
     this.config = config;
   }
 
   @Override
   public void start() {
-    this.bossGroup = NettyUtils.createEventLoopGroup(1);
-    this.workerGroup = NettyUtils.createEventLoopGroup(4);
 
-    Class<? extends ServerChannel> serverChannelClass = NettyUtils.getServerChannelClass();
-
-    this.logger.info("I am going to start a server on {}:{}.", this.config.getServerHost(),
-        this.config.getServerPort());
-
-    ServerBootstrap serverBootstrap = new ServerBootstrap();
-    try {
-      channel = serverBootstrap
-          .group(bossGroup, workerGroup)
-          .channel(serverChannelClass)
-          .childHandler(new ServerChannelInitializer(this))
-          .childOption(ChannelOption.SO_KEEPALIVE, true)
-          .bind(config.getServerHost(), config.getServerPort())
-          .sync().channel();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
 
     this.logger.info("Started the server on {}:{}.", this.config.getServerHost(),
         this.config.getServerPort());
@@ -118,44 +64,13 @@ public class SimpleEchidnaServer implements EchidnaServer {
   public void stop() {
     this.logger.info("Server is going to stop.");
 
-    this.channel.close();
 
-    this.bossGroup.shutdownGracefully();
-    this.workerGroup.shutdownGracefully();
 
     this.logger.info("Server stopped.");
   }
 
   @Override
   public boolean isRunning() {
-    return channel != null && channel.isActive();
-  }
-
-  /**
-   * Handling the given request.
-   *
-   * @param httpRequest the request.
-   * @return The response.
-   */
-  public HTTPResponse handleRequest(HTTPRequest httpRequest) {
-    Resource resource = this.resourceManager.findResource(httpRequest);
-    HTTPResponse response = HTTPResponse.newBuilder()
-        .setBody(new HTTPBody(new byte[0]))
-        .setHeaders(new HTTPHeaders())
-        .setStatus(HTTPStatus.NOT_FOUND)
-        .createHTTPResponse();
-
-    if (resource == null) {
-      response.writeDefaultHeader();
-
-      return response;
-    }
-
-    HTTPResponse newResponse = resource.handleRequest(httpRequest);
-    response = newResponse == null ? response : newResponse;
-
-    response.writeDefaultHeader();
-
-    return response;
+    return true;
   }
 }
