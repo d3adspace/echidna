@@ -44,12 +44,6 @@
 
   <dependencies>
     <dependency>
-      <artifactId>echidna-commons</artifactId>
-      <groupId>de.d3adspace</groupId>
-      <scope>compile</scope>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <artifactId>logback-classic</artifactId>
       <groupId>ch.qos.logback</groupId>
       <scope>compile</scope>
