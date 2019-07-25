@@ -22,6 +22,11 @@
 package de.d3adspace.echidna;
 
 import de.d3adspace.echidna.config.EchidnaConfig;
+import de.d3adspace.mantikor.commons.HTTPRequest;
+import de.d3adspace.mantikor.commons.HTTPResponse;
+import de.d3adspace.mantikor.commons.HTTPResponseBuilder;
+import de.d3adspace.mantikor.server.MantikorServer;
+import de.d3adspace.mantikor.server.config.MantikorConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +35,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public class SimpleEchidnaServer implements EchidnaServer {
+public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer {
 
   /**
    * Logger for server actions.
@@ -47,7 +52,11 @@ public class SimpleEchidnaServer implements EchidnaServer {
    *
    * @param config The server config.
    */
-  SimpleEchidnaServer(EchidnaConfig config) {
+  public SimpleEchidnaServer(EchidnaConfig config) {
+    super(MantikorConfig.builder()
+        .serverHost(config.getServerHost())
+        .serverPort(config.getServerPort())
+        .build());
     this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
     this.config = config;
   }
@@ -55,6 +64,7 @@ public class SimpleEchidnaServer implements EchidnaServer {
   @Override
   public void start() {
 
+    super.start();
 
     this.logger.info("Started the server on {}:{}.", this.config.getServerHost(),
         this.config.getServerPort());
@@ -64,13 +74,22 @@ public class SimpleEchidnaServer implements EchidnaServer {
   public void stop() {
     this.logger.info("Server is going to stop.");
 
-
+    super.stop();
 
     this.logger.info("Server stopped.");
   }
 
   @Override
+  protected HTTPResponse handleRequest(HTTPRequest httpRequest) {
+
+    return new HTTPResponseBuilder()
+        .createHTTPResponse();
+  }
+
+  @Override
   public boolean isRunning() {
+
+    // TODO: Check if running
     return true;
   }
 }
