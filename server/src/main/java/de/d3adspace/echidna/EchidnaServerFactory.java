@@ -22,6 +22,7 @@
 package de.d3adspace.echidna;
 
 import de.d3adspace.echidna.config.EchidnaConfig;
+import java.util.Objects;
 
 /**
  * Factory for all server instances.
@@ -37,6 +38,8 @@ public class EchidnaServerFactory {
    * @return The server.
    */
   public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
+    Objects.requireNonNull(config, "Config should not be null.");
+
     return new SimpleEchidnaServer(config);
   }
 }
