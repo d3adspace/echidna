@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,7 +34,7 @@ import java.util.StringTokenizer;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPRequestParser {
-	
+
 	/**
 	 * Parse a Request by its raw data.
 	 *
@@ -44,7 +44,7 @@ public class HTTPRequestParser {
 	 */
 	public static HTTPRequest parseRequest(String data) {
 		StringTokenizer tokenizer = new StringTokenizer(data);
-		
+
 		HTTPMethod method = HTTPMethod.valueOf(tokenizer.nextToken());
 		String locationToken = tokenizer.nextToken();
 		String location =
@@ -52,7 +52,7 @@ public class HTTPRequestParser {
 				: locationToken;
 		String version = tokenizer.nextToken();
 		HTTPHeaders headers = new HTTPHeaders(parseHeaders(data));
-		
+
 		HTTPRequest request = HTTPRequest.newBuilder()
 			.setRawRequestData(data)
 			.setMethod(method)
@@ -60,22 +60,22 @@ public class HTTPRequestParser {
 			.setVersion(version)
 			.setHeaders(headers)
 			.createHTTPRequest();
-		
+
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			
+
 			if ("Content-Length:".equalsIgnoreCase(token)) {
 				int length = Integer.parseInt(tokenizer.nextToken());
-				
+
 				if (length > 0) {
 					request.parsePostData(tokenizer.nextToken());
 				}
 			}
 		}
-		
+
 		return request;
 	}
-	
+
 	/**
 	 * Parse the headers of a request.
 	 *
@@ -86,18 +86,18 @@ public class HTTPRequestParser {
 	private static Map<String, String> parseHeaders(String data) {
 		Map<String, String> headers = new HashMap<>();
 		String[] lines = data.split("\\n");
-		
+
 		for (int i = 1; i < lines.length; i++) {
 			String line = lines[i];
 			String[] splitted = line.split(":", 2);
-			
+
 			if (splitted.length != 2) {
 				continue;
 			}
-			
+
 			headers.put(splitted[0].trim(), splitted[1].trim());
 		}
-		
+
 		return headers;
 	}
 }

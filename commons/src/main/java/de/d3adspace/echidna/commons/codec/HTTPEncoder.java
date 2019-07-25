@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,36 +34,36 @@ import java.util.Map.Entry;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPEncoder extends MessageToByteEncoder<HTTPResponse> {
-	
+
 	/**
 	 * The version of the http protocol.
 	 */
 	private static final String HTTP_VERSION = "HTTP/1.1";
-	
+
 	/**
 	 * Byte codes that indicates a new line.
 	 */
 	private static final byte[] NEW_LINE = "\r\n".getBytes();
-	
+
 	@Override
 	protected void encode(ChannelHandlerContext channelHandlerContext, HTTPResponse response,
 		ByteBuf byteBuf) throws Exception {
 		System.out.println("Response: " + response);
-		
+
 		String statusResponse = HTTP_VERSION + " "
 			+ response.getStatus().getCode() + " "
 			+ response.getStatus().getDescription() + new String(NEW_LINE);
-		
+
 		byteBuf.writeBytes(statusResponse.getBytes(CharsetUtil.UTF_8));
-		
+
 		for (Entry<String, String> entry : response.getHeaders().getHandle().entrySet()) {
 			String line = entry.getKey() + ": " + entry.getValue();
 			byteBuf.writeBytes(line.getBytes(CharsetUtil.UTF_8));
 			byteBuf.writeBytes(NEW_LINE);
 		}
-		
+
 		byteBuf.writeBytes(NEW_LINE);
-		
+
 		byteBuf.writeBytes(response.getBody().getHandle());
 	}
 }

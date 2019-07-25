@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -27,26 +27,26 @@ import java.util.List;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class EchidnaConfig {
-	
+
 	private final String serverHost;
 	private final int serverPort;
 	private final List<Object> resources;
-	
+
 	public EchidnaConfig(String serverHost, int serverPort,
 		List<Object> resources) {
 		this.serverHost = serverHost;
 		this.serverPort = serverPort;
 		this.resources = resources;
 	}
-	
+
 	public String getServerHost() {
 		return serverHost;
 	}
-	
+
 	public int getServerPort() {
 		return serverPort;
 	}
-	
+
 	public List<Object> getResourceClasses() {
 		return resources;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -42,17 +42,17 @@ import java.util.stream.Collectors;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class EchidnaClient {
-	
+
 	/**
 	 * Local agent.
 	 */
 	private static final String AGENT = "Echidna Client Agent v1";
-	
+
 	/**
 	 * Offset for codec.
 	 */
 	private static final int BYTE_OUT_OFFSET = 0;
-	
+
 	/**
 	 * Perfrom a request to a server.
 	 *
@@ -64,12 +64,12 @@ public class EchidnaClient {
 	public HTTPResponse request(URL url, HTTPRequest request, HTTPBody body) {
 		HttpURLConnection connection = this.createConnection(url, request, body);
 		byte[] bytes = this.readByteArray(connection);
-		
+
 		try {
 			Map<String, String> headers = connection.getHeaderFields().entrySet().stream()
 				.collect(Collectors.toMap(Entry::getKey,
 					p -> p.getValue().stream().collect(Collectors.joining(";"))));
-			
+
 			return HTTPResponse.newBuilder()
 				.setBody(new HTTPBody(bytes))
 				.setStatus(HTTPStatus.getByCode(connection.getResponseCode()))
@@ -78,10 +78,10 @@ public class EchidnaClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * Read the bytes by a connection.
 	 *
@@ -92,22 +92,22 @@ public class EchidnaClient {
 	private byte[] readByteArray(HttpURLConnection connection) {
 		try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 			InputStream inputStream = connection.getInputStream()) {
-			
+
 			byte[] part = new byte[4096];
-			
+
 			int i;
 			while ((i = inputStream.read(part)) > 0) {
 				byteArrayOutputStream.write(part, BYTE_OUT_OFFSET, i);
 			}
-			
+
 			return byteArrayOutputStream.toByteArray();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * Open a new connection.
 	 *
@@ -124,20 +124,20 @@ public class EchidnaClient {
 			connection.setRequestMethod(request.getMethod().name());
 			connection.setRequestProperty("User-Agent", AGENT);
 			connection.setDoOutput(true);
-			
+
 			if (body != null) {
 				try (DataOutputStream writer = new DataOutputStream(connection.getOutputStream())) {
 					writer.write(body.getHandle());
 				}
 			}
-			
+
 			for (Map.Entry<String, String> entry : request.getHeaders().getHandle().entrySet()) {
 				connection.setRequestProperty(entry.getKey(), entry.getValue());
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return connection;
 	}
 }

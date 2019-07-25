@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -27,22 +27,22 @@ import java.util.List;
  * Builder for a server config.
  */
 public class EchidnaConfigBuilder {
-	
+
 	/**
 	 * The server host.
 	 */
 	private String serverHost;
-	
+
 	/**
 	 * The server port.
 	 */
 	private int serverPort;
-	
+
 	/**
 	 * The resources to handle.
 	 */
 	private List<Object> resources;
-	
+
 	/**
 	 * Set the server host.
 	 *
@@ -54,7 +54,7 @@ public class EchidnaConfigBuilder {
 		this.serverHost = serverHost;
 		return this;
 	}
-	
+
 	/**
 	 * Set the server port.
 	 *
@@ -66,7 +66,7 @@ public class EchidnaConfigBuilder {
 		this.serverPort = serverPort;
 		return this;
 	}
-	
+
 	/**
 	 * Set the resources to handle.
 	 *
@@ -78,7 +78,7 @@ public class EchidnaConfigBuilder {
 		this.resources = resourceClasses;
 		return this;
 	}
-	
+
 	/**
 	 * Create the resulting config.
 	 *

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -29,22 +29,22 @@ import java.util.Date;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPResponse {
-	
+
 	/**
 	 * The status.
 	 */
 	private HTTPStatus status;
-	
+
 	/**
 	 * The headers.
 	 */
 	private HTTPHeaders headers;
-	
+
 	/**
 	 * The body.
 	 */
 	private HTTPBody body;
-	
+
 	/**
 	 * Create a response based on all its data.
 	 *
@@ -58,7 +58,7 @@ public class HTTPResponse {
 		this.headers = headers;
 		this.body = body;
 	}
-	
+
 	/**
 	 * Create an empty response.
 	 */
@@ -66,7 +66,7 @@ public class HTTPResponse {
 		this.status = HTTPStatus.OK;
 		this.headers = new HTTPHeaders();
 	}
-	
+
 	/**
 	 * Create a new builder.
 	 *
@@ -75,19 +75,19 @@ public class HTTPResponse {
 	public static HTTPResponseBuilder newBuilder() {
 		return new HTTPResponseBuilder();
 	}
-	
+
 	/**
 	 * Write the default headers.
 	 */
 	public void writeDefaultHeader() {
 		headers.addHeader("Date", new Date().toString());
 		headers.addHeader("Server", "Echidna Agent v1");
-		
+
 		if (body != null) {
 			headers.addHeader("Content-Length", Integer.toString(body.getHandle().length));
 		}
 	}
-	
+
 	/**
 	 * Get the status.
 	 *
@@ -96,7 +96,7 @@ public class HTTPResponse {
 	public HTTPStatus getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Get the body.
 	 *
@@ -105,7 +105,7 @@ public class HTTPResponse {
 	public HTTPBody getBody() {
 		return body;
 	}
-	
+
 	/**
 	 * Get the headers.
 	 *
@@ -114,7 +114,7 @@ public class HTTPResponse {
 	public HTTPHeaders getHeaders() {
 		return headers;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "HTTPResponse{" +

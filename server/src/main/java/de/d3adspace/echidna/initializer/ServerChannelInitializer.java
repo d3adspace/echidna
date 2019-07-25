@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -35,12 +35,12 @@ import io.netty.channel.socket.SocketChannel;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
-	
+
 	/**
 	 * The underlying server.
 	 */
 	private final SimpleEchidnaServer server;
-	
+
 	/**
 	 * Create a new initializer.
 	 *
@@ -49,7 +49,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
 	public ServerChannelInitializer(SimpleEchidnaServer server) {
 		this.server = server;
 	}
-	
+
 	/**
 	 * The Method that will initialize the channel.
 	 *
@@ -59,7 +59,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
 	 */
 	protected void initChannel(SocketChannel socketChannel) throws Exception {
 		ChannelPipeline pipeline = socketChannel.pipeline();
-		
+
 		pipeline.addLast(new HTTPDecoder());
 		pipeline.addLast(new HTTPEncoder());
 		pipeline.addLast(new EchidnaConnection(socketChannel, server));

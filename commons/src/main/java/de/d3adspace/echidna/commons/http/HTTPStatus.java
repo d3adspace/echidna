@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -25,7 +25,7 @@ package de.d3adspace.echidna.commons.http;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public enum HTTPStatus {
-	
+
 	OK(200, "OK"),
 	CREATED(201, "Created"),
 	ACCEPTED(202, "Accepted"),
@@ -36,16 +36,16 @@ public enum HTTPStatus {
 	UNSUPPORTED_MEDIA_TYPE(415, "Unsupported Media Type"),
 	INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 	SERVICE_UNAVAILABLE(503, "Service Unavailable"),;
-	
+
 	private final int code;
 	private final String description;
-	
+
 	HTTPStatus(int code, String description) {
-		
+
 		this.code = code;
 		this.description = description;
 	}
-	
+
 	public static HTTPStatus getByCode(int code) {
 		for (HTTPStatus status : HTTPStatus.values()) {
 			if (status.getCode() == code) {
@@ -54,11 +54,11 @@ public enum HTTPStatus {
 		}
 		return null;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public int getCode() {
 		return code;
 	}

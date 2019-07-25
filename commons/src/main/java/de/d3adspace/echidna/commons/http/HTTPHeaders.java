@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -30,12 +30,12 @@ import java.util.Map;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPHeaders {
-	
+
 	/**
 	 * Underlying Map.
 	 */
 	private Map<String, String> handle;
-	
+
 	/**
 	 * Create headers by its data.
 	 *
@@ -44,14 +44,14 @@ public class HTTPHeaders {
 	public HTTPHeaders(Map<String, String> handle) {
 		this.handle = handle;
 	}
-	
+
 	/**
 	 * Create empty header data.
 	 */
 	public HTTPHeaders() {
 		this(new HashMap<>());
 	}
-	
+
 	/**
 	 * Get the underlying data.
 	 *
@@ -60,7 +60,7 @@ public class HTTPHeaders {
 	public Map<String, String> getHandle() {
 		return handle;
 	}
-	
+
 	/**
 	 * Add a header property.
 	 *
@@ -70,7 +70,7 @@ public class HTTPHeaders {
 	public void addHeader(String name, String value) {
 		this.handle.put(name, value);
 	}
-	
+
 	/**
 	 * Get the value of a property.
 	 *
@@ -81,7 +81,7 @@ public class HTTPHeaders {
 	public String getHeader(String name) {
 		return this.handle.get(name);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "HTTPHeaders{" +

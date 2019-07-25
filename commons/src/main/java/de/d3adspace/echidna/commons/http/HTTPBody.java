@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -27,12 +27,12 @@ package de.d3adspace.echidna.commons.http;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPBody {
-	
+
 	/**
 	 * Raw data of a body.
 	 */
 	private final byte[] handle;
-	
+
 	/**
 	 * Create a body by its raw data.
 	 *
@@ -41,7 +41,7 @@ public class HTTPBody {
 	public HTTPBody(byte[] handle) {
 		this.handle = handle;
 	}
-	
+
 	/**
 	 * Create a bddy by its string.
 	 *
@@ -52,11 +52,11 @@ public class HTTPBody {
 	public static HTTPBody fromString(String string) {
 		return new HTTPBody(string.getBytes());
 	}
-	
+
 	public static BodyBuilder newBodyBuilder(String initialName, String initialValue) {
 		return new BodyBuilder(initialName, initialValue);
 	}
-	
+
 	/**
 	 * Get the byte data of a body.
 	 *
@@ -65,25 +65,25 @@ public class HTTPBody {
 	public byte[] getHandle() {
 		return handle;
 	}
-	
+
 	@Override
 	public String toString() {
 		return new String(this.handle);
 	}
-	
+
 	public static class BodyBuilder {
-		
+
 		private StringBuilder stringBuilder = new StringBuilder();
-		
+
 		BodyBuilder(String name, String value) {
 			stringBuilder.append(name).append("=").append(value);
 		}
-		
+
 		public BodyBuilder form(String key, String value) {
 			stringBuilder.append("&").append(key).append("=").append(value);
 			return this;
 		}
-		
+
 		public HTTPBody build() {
 			return HTTPBody.fromString(this.stringBuilder.toString());
 		}

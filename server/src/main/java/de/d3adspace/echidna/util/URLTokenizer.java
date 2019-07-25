@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class URLTokenizer extends StringTokenizer {
-	
+
 	/**
 	 * Create a new url tokenizer.
 	 *

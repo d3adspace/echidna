@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -25,32 +25,32 @@ package de.d3adspace.echidna.commons.http;
  * Builder for a request.
  */
 public class HTTPRequestBuilder {
-	
+
 	/**
 	 * The underlying raw data.
 	 */
 	private String rawRequestData;
-	
+
 	/**
 	 * The http method.
 	 */
 	private HTTPMethod method;
-	
+
 	/**
 	 * The location of the resource.
 	 */
 	private String location;
-	
+
 	/**
 	 * The http version.
 	 */
 	private String version;
-	
+
 	/**
 	 * The http headers.
 	 */
 	private HTTPHeaders headers;
-	
+
 	/**
 	 * Set the raw data of a request.
 	 *
@@ -62,7 +62,7 @@ public class HTTPRequestBuilder {
 		this.rawRequestData = rawRequestData;
 		return this;
 	}
-	
+
 	/**
 	 * Set the http method.
 	 *
@@ -74,7 +74,7 @@ public class HTTPRequestBuilder {
 		this.method = method;
 		return this;
 	}
-	
+
 	/**
 	 * Set the location of the resource.
 	 *
@@ -86,7 +86,7 @@ public class HTTPRequestBuilder {
 		this.location = location;
 		return this;
 	}
-	
+
 	/**
 	 * Set the http version.
 	 *
@@ -98,7 +98,7 @@ public class HTTPRequestBuilder {
 		this.version = version;
 		return this;
 	}
-	
+
 	/**
 	 * Set the http headers.
 	 *
@@ -110,7 +110,7 @@ public class HTTPRequestBuilder {
 		this.headers = headers;
 		return this;
 	}
-	
+
 	/**
 	 * Create the final config.
 	 *

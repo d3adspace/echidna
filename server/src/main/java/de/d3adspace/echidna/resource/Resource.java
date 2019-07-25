@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -49,17 +49,17 @@ import java.util.Map.Entry;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class Resource {
-	
+
 	/**
 	 * The rooting path of the resource.
 	 */
 	private final String rootPath;
-	
+
 	/**
 	 * The Map for all Methods.
 	 */
 	private final Map<String, ResourceMethod> resourceMethods;
-	
+
 	/**
 	 * Create a new resource based on its rooting path and the instance.
 	 *
@@ -69,10 +69,10 @@ public class Resource {
 	Resource(String rootPath, Object resourceInstance) {
 		this.rootPath = rootPath;
 		this.resourceMethods = new HashMap<>();
-		
+
 		this.findResourceMethods(resourceInstance);
 	}
-	
+
 	/**
 	 * Find all handler mehtods of the resource.
 	 *
@@ -81,16 +81,16 @@ public class Resource {
 	private void findResourceMethods(Object resourceInstance) {
 		for (Method declaredMethod : resourceInstance.getClass().getDeclaredMethods()) {
 			Path methodPath = declaredMethod.getAnnotation(Path.class);
-			
+
 			if (methodPath == null) {
 				continue;
 			}
-			
+
 			Consumes consumes = declaredMethod.getAnnotation(Consumes.class);
 			Produces produces = declaredMethod.getAnnotation(Produces.class);
-			
+
 			HTTPMethod method = HTTPMethod.GET;
-			
+
 			if (declaredMethod.isAnnotationPresent(POST.class)) {
 				method = HTTPMethod.POST;
 			} else if (declaredMethod.isAnnotationPresent(DELETE.class)) {
@@ -100,20 +100,20 @@ public class Resource {
 			} else if (declaredMethod.isAnnotationPresent(PATCH.class)) {
 				method = HTTPMethod.PATCH;
 			}
-			
+
 			ResourceMethod resourceMethod = new ResourceMethod(methodPath.value(), method,
 				consumes.value(), produces.value(), declaredMethod, resourceInstance);
-			
+
 			for (Parameter parameter : declaredMethod.getParameters()) {
 				if (parameter.isAnnotationPresent(PostKey.class)) {
 					resourceMethod.addPostParam(parameter.getAnnotation(PostKey.class).value());
 				}
 			}
-			
+
 			this.resourceMethods.put(methodPath.value(), resourceMethod);
 		}
 	}
-	
+
 	/**
 	 * Get the rooting path of the resource.
 	 *
@@ -122,7 +122,7 @@ public class Resource {
 	public String getRootPath() {
 		return rootPath;
 	}
-	
+
 	/**
 	 * Handle a request.
 	 *
@@ -133,50 +133,50 @@ public class Resource {
 	public HTTPResponse handleRequest(HTTPRequest httpRequest) {
 		for (Entry<String, ResourceMethod> entry : this.resourceMethods.entrySet()) {
 			ResourceMethod resourceMethod = entry.getValue();
-			
+
 			if (httpRequest.getMethod() == resourceMethod.getMethod()
 				&& Arrays.asList(httpRequest.getHeaders().getHeader("Accept").split(","))
 				.contains(resourceMethod.getConsumes())) {
-				
+
 				List<Object> parameters = new ArrayList<>();
 				parameters.add(httpRequest);
-				
+
 				if (httpRequest.getMethod() == HTTPMethod.POST) {
 					for (String parameter : resourceMethod.getPostParams()) {
 						parameters.add(httpRequest.getPostData().get(parameter));
 					}
 				}
-				
+
 				int requestSlashes = StringUtils.countMatches(httpRequest.getLocation(), "/");
 				int methodSlashes =
 					StringUtils.countMatches(resourceMethod.getPath(), "/") + StringUtils
 						.countMatches(rootPath, "/");
-				
+
 				if (requestSlashes != methodSlashes) {
 					continue;
 				}
-				
+
 				if (resourceMethod.getPath().contains("{")) {
 					URLTokenizer requestTokenizer = new URLTokenizer(
 						httpRequest.getLocation().replaceAll(rootPath, ""));
 					URLTokenizer methodTokenizer = new URLTokenizer(resourceMethod.getPath());
-					
+
 					if (requestTokenizer.countTokens() == methodTokenizer.countTokens()) {
 						while (requestTokenizer.hasMoreTokens()) {
 							String requestToken = requestTokenizer.nextToken();
 							String methodToken = methodTokenizer.nextToken();
-							
+
 							if (methodToken.startsWith("{") && methodToken.endsWith("}")) {
 								parameters.add(requestToken);
 							}
 						}
 					}
 				}
-				
+
 				return resourceMethod.invoke(parameters.toArray(new Object[parameters.size()]));
 			}
 		}
-		
+
 		return null;
 	}
 }

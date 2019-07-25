@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -45,37 +45,37 @@ import org.slf4j.LoggerFactory;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class SimpleEchidnaServer implements EchidnaServer {
-	
+
 	/**
 	 * Manager for all resources.
 	 */
 	private final ResourceManager resourceManager;
-	
+
 	/**
 	 * Logger for server actions.
 	 */
 	private final Logger logger;
-	
+
 	/**
 	 * Config for the server.
 	 */
 	private EchidnaConfig config;
-	
+
 	/**
 	 * Netty boss group.
 	 */
 	private EventLoopGroup bossGroup;
-	
+
 	/**
 	 * Netty worker group.
 	 */
 	private EventLoopGroup workerGroup;
-	
+
 	/**
 	 * Channel to client.
 	 */
 	private Channel channel;
-	
+
 	/**
 	 * Create a new Echidna server.
 	 *
@@ -86,17 +86,17 @@ public class SimpleEchidnaServer implements EchidnaServer {
 		this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
 		this.config = config;
 	}
-	
+
 	@Override
 	public void start() {
 		this.bossGroup = NettyUtils.createEventLoopGroup(1);
 		this.workerGroup = NettyUtils.createEventLoopGroup(4);
-		
+
 		Class<? extends ServerChannel> serverChannelClass = NettyUtils.getServerChannelClass();
-		
+
 		this.logger.info("I am going to start a server on {}:{}.", this.config.getServerHost(),
 			this.config.getServerPort());
-		
+
 		ServerBootstrap serverBootstrap = new ServerBootstrap();
 		try {
 			channel = serverBootstrap
@@ -109,28 +109,28 @@ public class SimpleEchidnaServer implements EchidnaServer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.logger.info("Started the server on {}:{}.", this.config.getServerHost(),
 			this.config.getServerPort());
 	}
-	
+
 	@Override
 	public void stop() {
 		this.logger.info("Server is going to stop.");
-		
+
 		this.channel.close();
-		
+
 		this.bossGroup.shutdownGracefully();
 		this.workerGroup.shutdownGracefully();
-		
+
 		this.logger.info("Server stopped.");
 	}
-	
+
 	@Override
 	public boolean isRunning() {
 		return channel != null && channel.isActive();
 	}
-	
+
 	/**
 	 * Handling the given request.
 	 *
@@ -145,18 +145,18 @@ public class SimpleEchidnaServer implements EchidnaServer {
 			.setHeaders(new HTTPHeaders())
 			.setStatus(HTTPStatus.NOT_FOUND)
 			.createHTTPResponse();
-		
+
 		if (resource == null) {
 			response.writeDefaultHeader();
-			
+
 			return response;
 		}
-		
+
 		HTTPResponse newResponse = resource.handleRequest(httpRequest);
 		response = newResponse == null ? response : newResponse;
-		
+
 		response.writeDefaultHeader();
-		
+
 		return response;
 	}
 }

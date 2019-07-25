@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -44,18 +44,18 @@ import java.util.Collections;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class EchidnaServerExample {
-	
+
 	public static void main(String[] args) {
 		EchidnaConfig config = new EchidnaConfigBuilder()
 			.setServerPort(80)
 			.setServerHost("localhost")
 			.setResourceClasses(Collections.singletonList(new ExampleResource()))
 			.createEchidnaConfig();
-		
+
 		EchidnaServer echidnaServer = EchidnaServerFactory.createEchidnaServer(config);
-		
+
 		echidnaServer.start();
-		
+
 		EchidnaClient client = new EchidnaClient();
 		HTTPRequest request = HTTPRequest
 			.newBuilder()
@@ -64,22 +64,22 @@ public class EchidnaServerExample {
 			.setVersion("HTTP/1.1")
 			.setHeaders(new HTTPHeaders())
 			.createHTTPRequest();
-		
+
 		HTTPBody body = HTTPBody.newBodyBuilder("test", "IchBinDerBeste").build();
-		
+
 		HTTPResponse response = null;
 		try {
 			response = client.request(new URL("http://localhost/rest/v1/user/add"), request, body);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("Got Response: " + response);
 	}
-	
+
 	@Path("/rest/v1")
 	public static class ExampleResource {
-		
+
 		@GET
 		@Path("/user/del")
 		@Consumes("text/html")
@@ -91,7 +91,7 @@ public class EchidnaServerExample {
 				.setHeaders(new HTTPHeaders())
 				.createHTTPResponse();
 		}
-		
+
 		@GET
 		@Path("/user/del/{userId}")
 		@Consumes("text/html")
@@ -103,14 +103,14 @@ public class EchidnaServerExample {
 				.setHeaders(new HTTPHeaders())
 				.createHTTPResponse();
 		}
-		
+
 		@POST
 		@Path("/user/add")
 		@Consumes("text/html")
 		@Produces("text/plain")
 		public HTTPResponse onUserDelIdPost(HTTPRequest request, @PostKey("test") String userId) {
 			System.out.println("Parameter: " + userId);
-			
+
 			return HTTPResponse.newBuilder()
 				.setStatus(HTTPStatus.OK)
 				.setBody(HTTPBody.fromString("Hey du " + userId))

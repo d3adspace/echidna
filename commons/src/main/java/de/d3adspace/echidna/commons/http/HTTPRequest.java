@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -30,39 +30,39 @@ import java.util.Map;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class HTTPRequest {
-	
+
 	private static final String POST_DELIMETER = "&";
-	
+
 	/**
 	 * The underlying raw data.
 	 */
 	private final String rawRequestData;
-	
+
 	/**
 	 * The method of the request.
 	 */
 	private final HTTPMethod method;
-	
+
 	/**
 	 * Location of the resource.
 	 */
 	private final String location;
-	
+
 	/**
 	 * The http version.
 	 */
 	private final String version;
-	
+
 	/**
 	 * The http headers.
 	 */
 	private final HTTPHeaders headers;
-	
+
 	/**
 	 * Post data.
 	 */
 	private final Map<String, String> postData = new HashMap<>();
-	
+
 	/**
 	 * Create a request based on all its data.
 	 *
@@ -80,7 +80,7 @@ public class HTTPRequest {
 		this.version = version;
 		this.headers = headers;
 	}
-	
+
 	/**
 	 * Create a new builder.
 	 *
@@ -89,7 +89,7 @@ public class HTTPRequest {
 	public static HTTPRequestBuilder newBuilder() {
 		return new HTTPRequestBuilder();
 	}
-	
+
 	/**
 	 * Get the headers.
 	 *
@@ -98,7 +98,7 @@ public class HTTPRequest {
 	public HTTPHeaders getHeaders() {
 		return headers;
 	}
-	
+
 	/**
 	 * Get the method.
 	 *
@@ -107,7 +107,7 @@ public class HTTPRequest {
 	public HTTPMethod getMethod() {
 		return method;
 	}
-	
+
 	/**
 	 * Location of the resource.
 	 *
@@ -116,7 +116,7 @@ public class HTTPRequest {
 	public String getLocation() {
 		return location;
 	}
-	
+
 	/**
 	 * Get the underlying raw data.
 	 *
@@ -125,7 +125,7 @@ public class HTTPRequest {
 	public String getRawRequestData() {
 		return rawRequestData;
 	}
-	
+
 	/**
 	 * Get the http version.
 	 *
@@ -134,7 +134,7 @@ public class HTTPRequest {
 	public String getVersion() {
 		return version;
 	}
-	
+
 	/**
 	 * Parse the post data of the request.
 	 *
@@ -142,7 +142,7 @@ public class HTTPRequest {
 	 */
 	public void parsePostData(String postParameter) {
 		String[] split = postParameter.split(POST_DELIMETER);
-		
+
 		for (String splitElement : split) {
 			String[] params = splitElement.split("=");
 			if (params.length == 2) {
@@ -150,7 +150,7 @@ public class HTTPRequest {
 			}
 		}
 	}
-	
+
 	/**
 	 * Get all the post data.
 	 *
@@ -159,7 +159,7 @@ public class HTTPRequest {
 	public Map<String, String> getPostData() {
 		return postData;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "HTTPRequest{" +

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 D3adspace
+ * Copyright (c) 2017 - 2019 D3adspace
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,42 +34,42 @@ import java.util.List;
  * @author Felix 'SasukeKawaii' Klauke
  */
 public class ResourceMethod {
-	
+
 	/**
 	 * The path to listen for.
 	 */
 	private final String path;
-	
+
 	/**
 	 * The http method to listen for.
 	 */
 	private final HTTPMethod method;
-	
+
 	/**
 	 * Which content type the method can consume.
 	 */
 	private final String consumes;
-	
+
 	/**
 	 * Which content types this method will throw out.
 	 */
 	private final String produces;
-	
+
 	/**
 	 * The internal method to invoke.
 	 */
 	private final Method declaredMethod;
-	
+
 	/**
 	 * The instance of the resource.
 	 */
 	private final Object resourceInstance;
-	
+
 	/**
 	 * List of all possible post params.
 	 */
 	private final List<String> postParams = new ArrayList<>();
-	
+
 	/**
 	 * Create a new method.
 	 *
@@ -89,7 +89,7 @@ public class ResourceMethod {
 		this.declaredMethod = declaredMethod;
 		this.resourceInstance = resourceInstance;
 	}
-	
+
 	/**
 	 * Get the http method.
 	 *
@@ -98,7 +98,7 @@ public class ResourceMethod {
 	public HTTPMethod getMethod() {
 		return method;
 	}
-	
+
 	/**
 	 * Get the path of the method.
 	 *
@@ -107,7 +107,7 @@ public class ResourceMethod {
 	public String getPath() {
 		return path;
 	}
-	
+
 	/**
 	 * Get the internal method of the resource.
 	 *
@@ -116,7 +116,7 @@ public class ResourceMethod {
 	public Method getDeclaredMethod() {
 		return declaredMethod;
 	}
-	
+
 	/**
 	 * Get the instance of the resource.
 	 *
@@ -125,7 +125,7 @@ public class ResourceMethod {
 	public Object getResourceInstance() {
 		return resourceInstance;
 	}
-	
+
 	/**
 	 * Get the type of the content the method consumes.
 	 *
@@ -134,7 +134,7 @@ public class ResourceMethod {
 	public String getConsumes() {
 		return consumes;
 	}
-	
+
 	/**
 	 * Get the type of the content the method produces.
 	 *
@@ -143,7 +143,7 @@ public class ResourceMethod {
 	public String getProduces() {
 		return produces;
 	}
-	
+
 	/**
 	 * Get the post params.
 	 *
@@ -152,11 +152,11 @@ public class ResourceMethod {
 	public List<String> getPostParams() {
 		return postParams;
 	}
-	
+
 	public void addPostParam(String name) {
 		this.postParams.add(name);
 	}
-	
+
 	/**
 	 * Invoke the internal method.
 	 *
@@ -170,10 +170,10 @@ public class ResourceMethod {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ResourceMethod{" +
