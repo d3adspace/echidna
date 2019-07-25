@@ -25,8 +25,10 @@ import de.d3adspace.echidna.config.EchidnaConfig;
 import de.d3adspace.mantikor.commons.HTTPRequest;
 import de.d3adspace.mantikor.commons.HTTPResponse;
 import de.d3adspace.mantikor.commons.HTTPResponseBuilder;
+import de.d3adspace.mantikor.commons.codec.HTTPRequestLine;
 import de.d3adspace.mantikor.server.MantikorServer;
 import de.d3adspace.mantikor.server.config.MantikorConfig;
+import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,6 +83,12 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
 
   @Override
   protected HTTPResponse handleRequest(HTTPRequest httpRequest) {
+
+    HTTPRequestLine requestLine = httpRequest.getRequestLine();
+    URI uri = requestLine.getUri();
+    String path = uri.getPath();
+
+    // TODO: Get resource by path and execuuuuute
 
     return new HTTPResponseBuilder()
         .createHTTPResponse();
