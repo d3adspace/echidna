@@ -30,12 +30,12 @@ import java.util.StringTokenizer;
  */
 public class URLTokenizer extends StringTokenizer {
 
-	/**
-	 * Create a new url tokenizer.
-	 *
-	 * @param str The url.
-	 */
-	public URLTokenizer(String str) {
-		super(str, "/");
-	}
+  /**
+   * Create a new url tokenizer.
+   *
+   * @param str The url.
+   */
+  public URLTokenizer(String str) {
+    super(str, "/");
+  }
 }

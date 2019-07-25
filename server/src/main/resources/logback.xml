@@ -30,12 +30,12 @@
   </appender>
 
   <appender class="ch.qos.logback.core.FileAppender" name="FILE">
-    <file>heimdall-server.log</file>
     <append>true</append>
-    <immediateFlush>true</immediateFlush>
     <encoder>
       <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
     </encoder>
+    <file>heimdall-server.log</file>
+    <immediateFlush>true</immediateFlush>
   </appender>
 
   <root level="info">

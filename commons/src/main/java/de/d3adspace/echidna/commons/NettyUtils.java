@@ -43,34 +43,34 @@ import io.netty.util.internal.PlatformDependent;
  */
 public class NettyUtils {
 
-	private static final boolean EPOLL = !PlatformDependent.isWindows() && Epoll.isAvailable();
+  private static final boolean EPOLL = !PlatformDependent.isWindows() && Epoll.isAvailable();
 
-	public static EventLoopGroup createEventLoopGroup(int threadAmount) {
-		return EPOLL ? new EpollEventLoopGroup(threadAmount) : new NioEventLoopGroup(threadAmount);
-	}
+  public static EventLoopGroup createEventLoopGroup(int threadAmount) {
+    return EPOLL ? new EpollEventLoopGroup(threadAmount) : new NioEventLoopGroup(threadAmount);
+  }
 
-	public static Class<? extends ServerChannel> getServerChannelClass() {
-		return EPOLL ? EpollServerSocketChannel.class : NioServerSocketChannel.class;
-	}
+  public static Class<? extends ServerChannel> getServerChannelClass() {
+    return EPOLL ? EpollServerSocketChannel.class : NioServerSocketChannel.class;
+  }
 
-	public static Class<? extends Channel> getChannel() {
-		return EPOLL ? EpollSocketChannel.class : NioSocketChannel.class;
-	}
+  public static Class<? extends Channel> getChannel() {
+    return EPOLL ? EpollSocketChannel.class : NioSocketChannel.class;
+  }
 
-	public static boolean isEpoll() {
-		return EPOLL;
-	}
+  public static boolean isEpoll() {
+    return EPOLL;
+  }
 
-	public static ChannelHandler createLengthFieldBasedFrameDecoder(int maxFrameLength, int offset,
-		int lengthFieldLength) {
-		return new LengthFieldBasedFrameDecoder(maxFrameLength, offset, lengthFieldLength);
-	}
+  public static ChannelHandler createLengthFieldBasedFrameDecoder(int maxFrameLength, int offset,
+      int lengthFieldLength) {
+    return new LengthFieldBasedFrameDecoder(maxFrameLength, offset, lengthFieldLength);
+  }
 
-	public static ChannelHandler createLengthFieldPrepender(int lengthFieldLength) {
-		return new LengthFieldPrepender(lengthFieldLength);
-	}
+  public static ChannelHandler createLengthFieldPrepender(int lengthFieldLength) {
+    return new LengthFieldPrepender(lengthFieldLength);
+  }
 
-	public static void closeWhenFlushed(Channel channel) {
-		channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
-	}
+  public static void closeWhenFlushed(Channel channel) {
+    channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+  }
 }

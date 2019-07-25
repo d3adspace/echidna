@@ -28,63 +28,60 @@ import java.util.List;
  */
 public class EchidnaConfigBuilder {
 
-	/**
-	 * The server host.
-	 */
-	private String serverHost;
+  /**
+   * The server host.
+   */
+  private String serverHost;
 
-	/**
-	 * The server port.
-	 */
-	private int serverPort;
+  /**
+   * The server port.
+   */
+  private int serverPort;
 
-	/**
-	 * The resources to handle.
-	 */
-	private List<Object> resources;
+  /**
+   * The resources to handle.
+   */
+  private List<Object> resources;
 
-	/**
-	 * Set the server host.
-	 *
-	 * @param serverHost The server host.
-	 *
-	 * @return The builder.
-	 */
-	public EchidnaConfigBuilder setServerHost(String serverHost) {
-		this.serverHost = serverHost;
-		return this;
-	}
+  /**
+   * Set the server host.
+   *
+   * @param serverHost The server host.
+   * @return The builder.
+   */
+  public EchidnaConfigBuilder setServerHost(String serverHost) {
+    this.serverHost = serverHost;
+    return this;
+  }
 
-	/**
-	 * Set the server port.
-	 *
-	 * @param serverPort The server port.
-	 *
-	 * @return The builder.
-	 */
-	public EchidnaConfigBuilder setServerPort(int serverPort) {
-		this.serverPort = serverPort;
-		return this;
-	}
+  /**
+   * Set the server port.
+   *
+   * @param serverPort The server port.
+   * @return The builder.
+   */
+  public EchidnaConfigBuilder setServerPort(int serverPort) {
+    this.serverPort = serverPort;
+    return this;
+  }
 
-	/**
-	 * Set the resources to handle.
-	 *
-	 * @param resourceClasses The resources.
-	 *
-	 * @return The builder.
-	 */
-	public EchidnaConfigBuilder setResourceClasses(List<Object> resourceClasses) {
-		this.resources = resourceClasses;
-		return this;
-	}
+  /**
+   * Set the resources to handle.
+   *
+   * @param resourceClasses The resources.
+   * @return The builder.
+   */
+  public EchidnaConfigBuilder setResourceClasses(List<Object> resourceClasses) {
+    this.resources = resourceClasses;
+    return this;
+  }
 
-	/**
-	 * Create the resulting config.
-	 *
-	 * @return The config.
-	 */
-	public EchidnaConfig createEchidnaConfig() {
-		return new EchidnaConfig(serverHost, serverPort, resources);
-	}
+  /**
+   * Create the resulting config.
+   *
+   * @return The config.
+   */
+  public EchidnaConfig createEchidnaConfig() {
+    return new EchidnaConfig(serverHost, serverPort, resources);
+  }
 }

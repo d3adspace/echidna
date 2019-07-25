@@ -30,15 +30,15 @@ import java.lang.annotation.Target;
  * @author Felix 'SasukeKawaii' Klauke
  */
 @Retention(
-	RetentionPolicy.RUNTIME
+    RetentionPolicy.RUNTIME
 )
 @Target(
-	{
-		ElementType.TYPE,
-		ElementType.METHOD
-	}
+    {
+        ElementType.TYPE,
+        ElementType.METHOD
+    }
 )
 public @interface Path {
 
-	String value();
+  String value();
 }

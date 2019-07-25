@@ -28,15 +28,14 @@ package de.d3adspace.echidna.util;
  */
 public class StringUtils {
 
-	/**
-	 * Count the occurances of a single char in a string.
-	 *
-	 * @param pattern The pattern to search in.
-	 * @param character The character to search for.
-	 *
-	 * @return The time the character is occuring
-	 */
-	public static int countMatches(String pattern, String character) {
-		return pattern.length() - pattern.replace(character, "").length();
-	}
+  /**
+   * Count the occurances of a single char in a string.
+   *
+   * @param pattern The pattern to search in.
+   * @param character The character to search for.
+   * @return The time the character is occuring
+   */
+  public static int countMatches(String pattern, String character) {
+    return pattern.length() - pattern.replace(character, "").length();
+  }
 }

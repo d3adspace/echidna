@@ -30,97 +30,97 @@ import java.util.Date;
  */
 public class HTTPResponse {
 
-	/**
-	 * The status.
-	 */
-	private HTTPStatus status;
+  /**
+   * The status.
+   */
+  private HTTPStatus status;
 
-	/**
-	 * The headers.
-	 */
-	private HTTPHeaders headers;
+  /**
+   * The headers.
+   */
+  private HTTPHeaders headers;
 
-	/**
-	 * The body.
-	 */
-	private HTTPBody body;
+  /**
+   * The body.
+   */
+  private HTTPBody body;
 
-	/**
-	 * Create a response based on all its data.
-	 *
-	 * @param status The status.
-	 * @param headers The headers.
-	 * @param body The body.
-	 */
-	public HTTPResponse(HTTPStatus status, HTTPHeaders headers,
-		HTTPBody body) {
-		this.status = status;
-		this.headers = headers;
-		this.body = body;
-	}
+  /**
+   * Create a response based on all its data.
+   *
+   * @param status The status.
+   * @param headers The headers.
+   * @param body The body.
+   */
+  public HTTPResponse(HTTPStatus status, HTTPHeaders headers,
+      HTTPBody body) {
+    this.status = status;
+    this.headers = headers;
+    this.body = body;
+  }
 
-	/**
-	 * Create an empty response.
-	 */
-	public HTTPResponse() {
-		this.status = HTTPStatus.OK;
-		this.headers = new HTTPHeaders();
-	}
+  /**
+   * Create an empty response.
+   */
+  public HTTPResponse() {
+    this.status = HTTPStatus.OK;
+    this.headers = new HTTPHeaders();
+  }
 
-	/**
-	 * Create a new builder.
-	 *
-	 * @return the builder.
-	 */
-	public static HTTPResponseBuilder newBuilder() {
-		return new HTTPResponseBuilder();
-	}
+  /**
+   * Create a new builder.
+   *
+   * @return the builder.
+   */
+  public static HTTPResponseBuilder newBuilder() {
+    return new HTTPResponseBuilder();
+  }
 
-	/**
-	 * Write the default headers.
-	 */
-	public void writeDefaultHeader() {
-		headers.addHeader("Date", new Date().toString());
-		headers.addHeader("Server", "Echidna Agent v1");
+  /**
+   * Write the default headers.
+   */
+  public void writeDefaultHeader() {
+    headers.addHeader("Date", new Date().toString());
+    headers.addHeader("Server", "Echidna Agent v1");
 
-		if (body != null) {
-			headers.addHeader("Content-Length", Integer.toString(body.getHandle().length));
-		}
-	}
+    if (body != null) {
+      headers.addHeader("Content-Length", Integer.toString(body.getHandle().length));
+    }
+  }
 
-	/**
-	 * Get the status.
-	 *
-	 * @return The status.
-	 */
-	public HTTPStatus getStatus() {
-		return status;
-	}
+  /**
+   * Get the status.
+   *
+   * @return The status.
+   */
+  public HTTPStatus getStatus() {
+    return status;
+  }
 
-	/**
-	 * Get the body.
-	 *
-	 * @return The body.
-	 */
-	public HTTPBody getBody() {
-		return body;
-	}
+  /**
+   * Get the body.
+   *
+   * @return The body.
+   */
+  public HTTPBody getBody() {
+    return body;
+  }
 
-	/**
-	 * Get the headers.
-	 *
-	 * @return The headers.
-	 */
-	public HTTPHeaders getHeaders() {
-		return headers;
-	}
+  /**
+   * Get the headers.
+   *
+   * @return The headers.
+   */
+  public HTTPHeaders getHeaders() {
+    return headers;
+  }
 
-	@Override
-	public String toString() {
-		return "HTTPResponse{" +
-			"status=" + status +
-			", headers=" + headers +
-			//", body=" + body +
-			'}';
-	}
+  @Override
+  public String toString() {
+    return "HTTPResponse{" +
+        "status=" + status +
+        ", headers=" + headers +
+        //", body=" + body +
+        '}';
+  }
 }

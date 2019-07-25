@@ -30,14 +30,13 @@ import de.d3adspace.echidna.config.EchidnaConfig;
  */
 public class EchidnaServerFactory {
 
-	/**
-	 * Create a new server based on a config.
-	 *
-	 * @param config The config.
-	 *
-	 * @return The server.
-	 */
-	public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
-		return new SimpleEchidnaServer(config);
-	}
+  /**
+   * Create a new server based on a config.
+   *
+   * @param config The config.
+   * @return The server.
+   */
+  public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
+    return new SimpleEchidnaServer(config);
+  }
 }

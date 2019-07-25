@@ -23,26 +23,26 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>echidna-example</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>echidna-server</artifactId>
+      <groupId>de.d3adspace</groupId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>echidna-client</artifactId>
+      <groupId>de.d3adspace</groupId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>echidna-parent</artifactId>
     <groupId>de.d3adspace</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>echidna-example</artifactId>
-
-  <dependencies>
-    <dependency>
-      <groupId>de.d3adspace</groupId>
-      <artifactId>echidna-server</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>de.d3adspace</groupId>
-      <artifactId>echidna-client</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
 
 </project>

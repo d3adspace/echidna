@@ -26,40 +26,41 @@ package de.d3adspace.echidna.commons.http;
  */
 public enum HTTPStatus {
 
-	OK(200, "OK"),
-	CREATED(201, "Created"),
-	ACCEPTED(202, "Accepted"),
-	BAD_REQUEST(400, "Bad Request"),
-	FORBIDDEN(403, "Forbidden"),
-	NOT_FOUND(404, "Not Found"),
-	METHOD_NOT_ALLOWED(405, "Method Not Allowed"),
-	UNSUPPORTED_MEDIA_TYPE(415, "Unsupported Media Type"),
-	INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
-	SERVICE_UNAVAILABLE(503, "Service Unavailable"),;
+  OK(200, "OK"),
+  CREATED(201, "Created"),
+  ACCEPTED(202, "Accepted"),
+  BAD_REQUEST(400, "Bad Request"),
+  FORBIDDEN(403, "Forbidden"),
+  NOT_FOUND(404, "Not Found"),
+  METHOD_NOT_ALLOWED(405, "Method Not Allowed"),
+  UNSUPPORTED_MEDIA_TYPE(415, "Unsupported Media Type"),
+  INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+  SERVICE_UNAVAILABLE(503, "Service Unavailable"),
+  ;
 
-	private final int code;
-	private final String description;
+  private final int code;
+  private final String description;
 
-	HTTPStatus(int code, String description) {
+  HTTPStatus(int code, String description) {
 
-		this.code = code;
-		this.description = description;
-	}
+    this.code = code;
+    this.description = description;
+  }
 
-	public static HTTPStatus getByCode(int code) {
-		for (HTTPStatus status : HTTPStatus.values()) {
-			if (status.getCode() == code) {
-				return status;
-			}
-		}
-		return null;
-	}
+  public static HTTPStatus getByCode(int code) {
+    for (HTTPStatus status : HTTPStatus.values()) {
+      if (status.getCode() == code) {
+        return status;
+      }
+    }
+    return null;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public int getCode() {
-		return code;
-	}
+  public int getCode() {
+    return code;
+  }
 }

@@ -36,32 +36,31 @@ import io.netty.channel.socket.SocketChannel;
  */
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-	/**
-	 * The underlying server.
-	 */
-	private final SimpleEchidnaServer server;
+  /**
+   * The underlying server.
+   */
+  private final SimpleEchidnaServer server;
 
-	/**
-	 * Create a new initializer.
-	 *
-	 * @param server The server.
-	 */
-	public ServerChannelInitializer(SimpleEchidnaServer server) {
-		this.server = server;
-	}
+  /**
+   * Create a new initializer.
+   *
+   * @param server The server.
+   */
+  public ServerChannelInitializer(SimpleEchidnaServer server) {
+    this.server = server;
+  }
 
-	/**
-	 * The Method that will initialize the channel.
-	 *
-	 * @param socketChannel The channel.
-	 *
-	 * @throws Exception Codec exception.
-	 */
-	protected void initChannel(SocketChannel socketChannel) throws Exception {
-		ChannelPipeline pipeline = socketChannel.pipeline();
+  /**
+   * The Method that will initialize the channel.
+   *
+   * @param socketChannel The channel.
+   * @throws Exception Codec exception.
+   */
+  protected void initChannel(SocketChannel socketChannel) throws Exception {
+    ChannelPipeline pipeline = socketChannel.pipeline();
 
-		pipeline.addLast(new HTTPDecoder());
-		pipeline.addLast(new HTTPEncoder());
-		pipeline.addLast(new EchidnaConnection(socketChannel, server));
-	}
+    pipeline.addLast(new HTTPDecoder());
+    pipeline.addLast(new HTTPEncoder());
+    pipeline.addLast(new EchidnaConnection(socketChannel, server));
+  }
 }

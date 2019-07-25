@@ -36,15 +36,15 @@ import java.util.List;
  */
 public class HTTPDecoder extends ByteToMessageDecoder {
 
-	@Override
-	protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf,
-		List<Object> list) throws Exception {
-		String rawData = byteBuf.toString(CharsetUtil.UTF_8);
+  @Override
+  protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf,
+      List<Object> list) throws Exception {
+    String rawData = byteBuf.toString(CharsetUtil.UTF_8);
 
-		HTTPRequest request = HTTPRequestParser.parseRequest(rawData);
+    HTTPRequest request = HTTPRequestParser.parseRequest(rawData);
 
-		list.add(request);
+    list.add(request);
 
-		byteBuf.clear();
-	}
+    byteBuf.clear();
+  }
 }

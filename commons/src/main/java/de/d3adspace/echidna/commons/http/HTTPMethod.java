@@ -28,9 +28,9 @@ package de.d3adspace.echidna.commons.http;
  */
 public enum HTTPMethod {
 
-	GET,
-	POST,
-	PUT,
-	DELETE,
-	PATCH
+  GET,
+  POST,
+  PUT,
+  DELETE,
+  PATCH
 }

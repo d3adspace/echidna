@@ -35,154 +35,153 @@ import java.util.List;
  */
 public class ResourceMethod {
 
-	/**
-	 * The path to listen for.
-	 */
-	private final String path;
+  /**
+   * The path to listen for.
+   */
+  private final String path;
 
-	/**
-	 * The http method to listen for.
-	 */
-	private final HTTPMethod method;
+  /**
+   * The http method to listen for.
+   */
+  private final HTTPMethod method;
 
-	/**
-	 * Which content type the method can consume.
-	 */
-	private final String consumes;
+  /**
+   * Which content type the method can consume.
+   */
+  private final String consumes;
 
-	/**
-	 * Which content types this method will throw out.
-	 */
-	private final String produces;
+  /**
+   * Which content types this method will throw out.
+   */
+  private final String produces;
 
-	/**
-	 * The internal method to invoke.
-	 */
-	private final Method declaredMethod;
+  /**
+   * The internal method to invoke.
+   */
+  private final Method declaredMethod;
 
-	/**
-	 * The instance of the resource.
-	 */
-	private final Object resourceInstance;
+  /**
+   * The instance of the resource.
+   */
+  private final Object resourceInstance;
 
-	/**
-	 * List of all possible post params.
-	 */
-	private final List<String> postParams = new ArrayList<>();
+  /**
+   * List of all possible post params.
+   */
+  private final List<String> postParams = new ArrayList<>();
 
-	/**
-	 * Create a new method.
-	 *
-	 * @param path The path of the method.
-	 * @param method The http method.
-	 * @param consumes The consuming type.
-	 * @param produces The producing type.
-	 * @param declaredMethod The internal method.
-	 * @param resourceInstance The resource.
-	 */
-	ResourceMethod(String path, HTTPMethod method,
-		String consumes, String produces, Method declaredMethod, Object resourceInstance) {
-		this.path = path;
-		this.method = method;
-		this.consumes = consumes;
-		this.produces = produces;
-		this.declaredMethod = declaredMethod;
-		this.resourceInstance = resourceInstance;
-	}
+  /**
+   * Create a new method.
+   *
+   * @param path The path of the method.
+   * @param method The http method.
+   * @param consumes The consuming type.
+   * @param produces The producing type.
+   * @param declaredMethod The internal method.
+   * @param resourceInstance The resource.
+   */
+  ResourceMethod(String path, HTTPMethod method,
+      String consumes, String produces, Method declaredMethod, Object resourceInstance) {
+    this.path = path;
+    this.method = method;
+    this.consumes = consumes;
+    this.produces = produces;
+    this.declaredMethod = declaredMethod;
+    this.resourceInstance = resourceInstance;
+  }
 
-	/**
-	 * Get the http method.
-	 *
-	 * @return The http method.
-	 */
-	public HTTPMethod getMethod() {
-		return method;
-	}
+  /**
+   * Get the http method.
+   *
+   * @return The http method.
+   */
+  public HTTPMethod getMethod() {
+    return method;
+  }
 
-	/**
-	 * Get the path of the method.
-	 *
-	 * @return The path.
-	 */
-	public String getPath() {
-		return path;
-	}
+  /**
+   * Get the path of the method.
+   *
+   * @return The path.
+   */
+  public String getPath() {
+    return path;
+  }
 
-	/**
-	 * Get the internal method of the resource.
-	 *
-	 * @return The method.
-	 */
-	public Method getDeclaredMethod() {
-		return declaredMethod;
-	}
+  /**
+   * Get the internal method of the resource.
+   *
+   * @return The method.
+   */
+  public Method getDeclaredMethod() {
+    return declaredMethod;
+  }
 
-	/**
-	 * Get the instance of the resource.
-	 *
-	 * @return The resource.
-	 */
-	public Object getResourceInstance() {
-		return resourceInstance;
-	}
+  /**
+   * Get the instance of the resource.
+   *
+   * @return The resource.
+   */
+  public Object getResourceInstance() {
+    return resourceInstance;
+  }
 
-	/**
-	 * Get the type of the content the method consumes.
-	 *
-	 * @return The type.
-	 */
-	public String getConsumes() {
-		return consumes;
-	}
+  /**
+   * Get the type of the content the method consumes.
+   *
+   * @return The type.
+   */
+  public String getConsumes() {
+    return consumes;
+  }
 
-	/**
-	 * Get the type of the content the method produces.
-	 *
-	 * @return The type.
-	 */
-	public String getProduces() {
-		return produces;
-	}
+  /**
+   * Get the type of the content the method produces.
+   *
+   * @return The type.
+   */
+  public String getProduces() {
+    return produces;
+  }
 
-	/**
-	 * Get the post params.
-	 *
-	 * @return The post params.
-	 */
-	public List<String> getPostParams() {
-		return postParams;
-	}
+  /**
+   * Get the post params.
+   *
+   * @return The post params.
+   */
+  public List<String> getPostParams() {
+    return postParams;
+  }
 
-	public void addPostParam(String name) {
-		this.postParams.add(name);
-	}
+  public void addPostParam(String name) {
+    this.postParams.add(name);
+  }
 
-	/**
-	 * Invoke the internal method.
-	 *
-	 * @param params The params to call the method.
-	 *
-	 * @return The response.
-	 */
-	public HTTPResponse invoke(Object... params) {
-		try {
-			return (HTTPResponse) this.declaredMethod.invoke(this.resourceInstance, params);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
+  /**
+   * Invoke the internal method.
+   *
+   * @param params The params to call the method.
+   * @return The response.
+   */
+  public HTTPResponse invoke(Object... params) {
+    try {
+      return (HTTPResponse) this.declaredMethod.invoke(this.resourceInstance, params);
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      e.printStackTrace();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	@Override
-	public String toString() {
-		return "ResourceMethod{" +
-			"path='" + path + '\'' +
-			", method=" + method +
-			", consumes='" + consumes + '\'' +
-			", produces='" + produces + '\'' +
-			", declaredMethod=" + declaredMethod +
-			", resourceInstance=" + resourceInstance +
-			'}';
-	}
+  @Override
+  public String toString() {
+    return "ResourceMethod{" +
+        "path='" + path + '\'' +
+        ", method=" + method +
+        ", consumes='" + consumes + '\'' +
+        ", produces='" + produces + '\'' +
+        ", declaredMethod=" + declaredMethod +
+        ", resourceInstance=" + resourceInstance +
+        '}';
+  }
 }

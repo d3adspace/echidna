@@ -35,44 +35,43 @@ import java.util.Map.Entry;
  */
 public class ResourceManager {
 
-	/**
-	 * The underlying Map.
-	 */
-	private final Map<String, Resource> resources;
+  /**
+   * The underlying Map.
+   */
+  private final Map<String, Resource> resources;
 
-	/**
-	 * Create a Manager by a config.
-	 *
-	 * @param config The config.
-	 */
-	public ResourceManager(EchidnaConfig config) {
-		this.resources = new HashMap<>();
+  /**
+   * Create a Manager by a config.
+   *
+   * @param config The config.
+   */
+  public ResourceManager(EchidnaConfig config) {
+    this.resources = new HashMap<>();
 
-		config.getResourceClasses().forEach(this::addResource);
-	}
+    config.getResourceClasses().forEach(this::addResource);
+  }
 
-	/**
-	 * Register a resource.
-	 *
-	 * @param resourceInstance The instance of the resource.
-	 */
-	private void addResource(Object resourceInstance) {
-		String rootPath = resourceInstance.getClass().getAnnotation(Path.class).value();
-		Resource resource = new Resource(rootPath, resourceInstance);
-		this.resources.put(rootPath, resource);
-	}
+  /**
+   * Register a resource.
+   *
+   * @param resourceInstance The instance of the resource.
+   */
+  private void addResource(Object resourceInstance) {
+    String rootPath = resourceInstance.getClass().getAnnotation(Path.class).value();
+    Resource resource = new Resource(rootPath, resourceInstance);
+    this.resources.put(rootPath, resource);
+  }
 
-	/**
-	 * Search for a resource by its rooting path.
-	 *
-	 * @param request The request.
-	 *
-	 * @return The resource.
-	 */
-	public Resource findResource(HTTPRequest request) {
-		return this.resources.entrySet().stream()
-			.filter(entry -> request.getLocation().startsWith(entry.getKey()))
-			.map(Entry::getValue)
-			.findFirst().orElse(null);
-	}
+  /**
+   * Search for a resource by its rooting path.
+   *
+   * @param request The request.
+   * @return The resource.
+   */
+  public Resource findResource(HTTPRequest request) {
+    return this.resources.entrySet().stream()
+        .filter(entry -> request.getLocation().startsWith(entry.getKey()))
+        .map(Entry::getValue)
+        .findFirst().orElse(null);
+  }
 }

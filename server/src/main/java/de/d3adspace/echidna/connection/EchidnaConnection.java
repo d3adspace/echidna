@@ -35,33 +35,33 @@ import io.netty.channel.SimpleChannelInboundHandler;
  */
 public class EchidnaConnection extends SimpleChannelInboundHandler<HTTPRequest> {
 
-	/**
-	 * The channel to client.
-	 */
-	private final Channel channel;
+  /**
+   * The channel to client.
+   */
+  private final Channel channel;
 
-	/**
-	 * The underlying server.
-	 */
-	private final SimpleEchidnaServer server;
+  /**
+   * The underlying server.
+   */
+  private final SimpleEchidnaServer server;
 
-	/**
-	 * Create a connection based on its channel and the server it belongs to.
-	 *
-	 * @param channel The channel.
-	 * @param server The server.
-	 */
-	public EchidnaConnection(Channel channel, SimpleEchidnaServer server) {
-		this.channel = channel;
-		this.server = server;
-	}
+  /**
+   * Create a connection based on its channel and the server it belongs to.
+   *
+   * @param channel The channel.
+   * @param server The server.
+   */
+  public EchidnaConnection(Channel channel, SimpleEchidnaServer server) {
+    this.channel = channel;
+    this.server = server;
+  }
 
-	@Override
-	protected void channelRead0(ChannelHandlerContext channelHandlerContext,
-		HTTPRequest httpRequest) throws Exception {
+  @Override
+  protected void channelRead0(ChannelHandlerContext channelHandlerContext,
+      HTTPRequest httpRequest) throws Exception {
 
-		HTTPResponse response = this.server.handleRequest(httpRequest);
+    HTTPResponse response = this.server.handleRequest(httpRequest);
 
-		this.channel.writeAndFlush(response);
-	}
+    this.channel.writeAndFlush(response);
+  }
 }

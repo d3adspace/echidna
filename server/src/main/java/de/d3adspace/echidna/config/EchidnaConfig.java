@@ -28,26 +28,26 @@ import java.util.List;
  */
 public class EchidnaConfig {
 
-	private final String serverHost;
-	private final int serverPort;
-	private final List<Object> resources;
+  private final String serverHost;
+  private final int serverPort;
+  private final List<Object> resources;
 
-	public EchidnaConfig(String serverHost, int serverPort,
-		List<Object> resources) {
-		this.serverHost = serverHost;
-		this.serverPort = serverPort;
-		this.resources = resources;
-	}
+  public EchidnaConfig(String serverHost, int serverPort,
+      List<Object> resources) {
+    this.serverHost = serverHost;
+    this.serverPort = serverPort;
+    this.resources = resources;
+  }
 
-	public String getServerHost() {
-		return serverHost;
-	}
+  public String getServerHost() {
+    return serverHost;
+  }
 
-	public int getServerPort() {
-		return serverPort;
-	}
+  public int getServerPort() {
+    return serverPort;
+  }
 
-	public List<Object> getResourceClasses() {
-		return resources;
-	}
+  public List<Object> getResourceClasses() {
+    return resources;
+  }
 }

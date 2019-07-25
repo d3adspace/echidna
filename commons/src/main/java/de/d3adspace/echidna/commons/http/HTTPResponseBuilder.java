@@ -23,30 +23,30 @@ package de.d3adspace.echidna.commons.http;
 
 public class HTTPResponseBuilder {
 
-	private HTTPStatus status;
-	private HTTPHeaders headers = new HTTPHeaders();
-	private HTTPBody body = new HTTPBody(new byte[0]);
+  private HTTPStatus status;
+  private HTTPHeaders headers = new HTTPHeaders();
+  private HTTPBody body = new HTTPBody(new byte[0]);
 
-	HTTPResponseBuilder() {
+  HTTPResponseBuilder() {
 
-	}
+  }
 
-	public HTTPResponseBuilder setStatus(HTTPStatus status) {
-		this.status = status;
-		return this;
-	}
+  public HTTPResponseBuilder setStatus(HTTPStatus status) {
+    this.status = status;
+    return this;
+  }
 
-	public HTTPResponseBuilder setHeaders(HTTPHeaders headers) {
-		this.headers = headers;
-		return this;
-	}
+  public HTTPResponseBuilder setHeaders(HTTPHeaders headers) {
+    this.headers = headers;
+    return this;
+  }
 
-	public HTTPResponseBuilder setBody(HTTPBody body) {
-		this.body = body;
-		return this;
-	}
+  public HTTPResponseBuilder setBody(HTTPBody body) {
+    this.body = body;
+    return this;
+  }
 
-	public HTTPResponse createHTTPResponse() {
-		return new HTTPResponse(status, headers, body);
-	}
+  public HTTPResponse createHTTPResponse() {
+    return new HTTPResponse(status, headers, body);
+  }
 }

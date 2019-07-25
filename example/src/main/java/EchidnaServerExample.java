@@ -45,77 +45,77 @@ import java.util.Collections;
  */
 public class EchidnaServerExample {
 
-	public static void main(String[] args) {
-		EchidnaConfig config = new EchidnaConfigBuilder()
-			.setServerPort(80)
-			.setServerHost("localhost")
-			.setResourceClasses(Collections.singletonList(new ExampleResource()))
-			.createEchidnaConfig();
+  public static void main(String[] args) {
+    EchidnaConfig config = new EchidnaConfigBuilder()
+        .setServerPort(80)
+        .setServerHost("localhost")
+        .setResourceClasses(Collections.singletonList(new ExampleResource()))
+        .createEchidnaConfig();
 
-		EchidnaServer echidnaServer = EchidnaServerFactory.createEchidnaServer(config);
+    EchidnaServer echidnaServer = EchidnaServerFactory.createEchidnaServer(config);
 
-		echidnaServer.start();
+    echidnaServer.start();
 
-		EchidnaClient client = new EchidnaClient();
-		HTTPRequest request = HTTPRequest
-			.newBuilder()
-			.setLocation("rest/v1/user/add")
-			.setMethod(HTTPMethod.POST)
-			.setVersion("HTTP/1.1")
-			.setHeaders(new HTTPHeaders())
-			.createHTTPRequest();
+    EchidnaClient client = new EchidnaClient();
+    HTTPRequest request = HTTPRequest
+        .newBuilder()
+        .setLocation("rest/v1/user/add")
+        .setMethod(HTTPMethod.POST)
+        .setVersion("HTTP/1.1")
+        .setHeaders(new HTTPHeaders())
+        .createHTTPRequest();
 
-		HTTPBody body = HTTPBody.newBodyBuilder("test", "IchBinDerBeste").build();
+    HTTPBody body = HTTPBody.newBodyBuilder("test", "IchBinDerBeste").build();
 
-		HTTPResponse response = null;
-		try {
-			response = client.request(new URL("http://localhost/rest/v1/user/add"), request, body);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+    HTTPResponse response = null;
+    try {
+      response = client.request(new URL("http://localhost/rest/v1/user/add"), request, body);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
 
-		System.out.println("Got Response: " + response);
-	}
+    System.out.println("Got Response: " + response);
+  }
 
-	@Path("/rest/v1")
-	public static class ExampleResource {
+  @Path("/rest/v1")
+  public static class ExampleResource {
 
-		@GET
-		@Path("/user/del")
-		@Consumes("text/html")
-		@Produces("text/plain")
-		public HTTPResponse onUserDel(HTTPRequest request) {
-			return HTTPResponse.newBuilder()
-				.setStatus(HTTPStatus.OK)
-				.setBody(HTTPBody.fromString("Hey"))
-				.setHeaders(new HTTPHeaders())
-				.createHTTPResponse();
-		}
+    @GET
+    @Path("/user/del")
+    @Consumes("text/html")
+    @Produces("text/plain")
+    public HTTPResponse onUserDel(HTTPRequest request) {
+      return HTTPResponse.newBuilder()
+          .setStatus(HTTPStatus.OK)
+          .setBody(HTTPBody.fromString("Hey"))
+          .setHeaders(new HTTPHeaders())
+          .createHTTPResponse();
+    }
 
-		@GET
-		@Path("/user/del/{userId}")
-		@Consumes("text/html")
-		@Produces("text/plain")
-		public HTTPResponse onUserDelId(HTTPRequest request, String userId) {
-			return HTTPResponse.newBuilder()
-				.setStatus(HTTPStatus.OK)
-				.setBody(HTTPBody.fromString("Hey du " + userId))
-				.setHeaders(new HTTPHeaders())
-				.createHTTPResponse();
-		}
+    @GET
+    @Path("/user/del/{userId}")
+    @Consumes("text/html")
+    @Produces("text/plain")
+    public HTTPResponse onUserDelId(HTTPRequest request, String userId) {
+      return HTTPResponse.newBuilder()
+          .setStatus(HTTPStatus.OK)
+          .setBody(HTTPBody.fromString("Hey du " + userId))
+          .setHeaders(new HTTPHeaders())
+          .createHTTPResponse();
+    }
 
-		@POST
-		@Path("/user/add")
-		@Consumes("text/html")
-		@Produces("text/plain")
-		public HTTPResponse onUserDelIdPost(HTTPRequest request, @PostKey("test") String userId) {
-			System.out.println("Parameter: " + userId);
+    @POST
+    @Path("/user/add")
+    @Consumes("text/html")
+    @Produces("text/plain")
+    public HTTPResponse onUserDelIdPost(HTTPRequest request, @PostKey("test") String userId) {
+      System.out.println("Parameter: " + userId);
 
-			return HTTPResponse.newBuilder()
-				.setStatus(HTTPStatus.OK)
-				.setBody(HTTPBody.fromString("Hey du " + userId))
-				.setHeaders(new HTTPHeaders())
-				.createHTTPResponse();
-		}
-	}
+      return HTTPResponse.newBuilder()
+          .setStatus(HTTPStatus.OK)
+          .setBody(HTTPBody.fromString("Hey du " + userId))
+          .setHeaders(new HTTPHeaders())
+          .createHTTPResponse();
+    }
+  }
 }

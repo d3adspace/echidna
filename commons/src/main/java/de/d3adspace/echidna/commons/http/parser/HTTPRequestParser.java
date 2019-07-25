@@ -35,69 +35,67 @@ import java.util.StringTokenizer;
  */
 public class HTTPRequestParser {
 
-	/**
-	 * Parse a Request by its raw data.
-	 *
-	 * @param data The data.
-	 *
-	 * @return The request.
-	 */
-	public static HTTPRequest parseRequest(String data) {
-		StringTokenizer tokenizer = new StringTokenizer(data);
+  /**
+   * Parse a Request by its raw data.
+   *
+   * @param data The data.
+   * @return The request.
+   */
+  public static HTTPRequest parseRequest(String data) {
+    StringTokenizer tokenizer = new StringTokenizer(data);
 
-		HTTPMethod method = HTTPMethod.valueOf(tokenizer.nextToken());
-		String locationToken = tokenizer.nextToken();
-		String location =
-			locationToken.endsWith("/") ? locationToken.substring(0, locationToken.lastIndexOf('/'))
-				: locationToken;
-		String version = tokenizer.nextToken();
-		HTTPHeaders headers = new HTTPHeaders(parseHeaders(data));
+    HTTPMethod method = HTTPMethod.valueOf(tokenizer.nextToken());
+    String locationToken = tokenizer.nextToken();
+    String location =
+        locationToken.endsWith("/") ? locationToken.substring(0, locationToken.lastIndexOf('/'))
+            : locationToken;
+    String version = tokenizer.nextToken();
+    HTTPHeaders headers = new HTTPHeaders(parseHeaders(data));
 
-		HTTPRequest request = HTTPRequest.newBuilder()
-			.setRawRequestData(data)
-			.setMethod(method)
-			.setLocation(location)
-			.setVersion(version)
-			.setHeaders(headers)
-			.createHTTPRequest();
+    HTTPRequest request = HTTPRequest.newBuilder()
+        .setRawRequestData(data)
+        .setMethod(method)
+        .setLocation(location)
+        .setVersion(version)
+        .setHeaders(headers)
+        .createHTTPRequest();
 
-		while (tokenizer.hasMoreTokens()) {
-			String token = tokenizer.nextToken();
+    while (tokenizer.hasMoreTokens()) {
+      String token = tokenizer.nextToken();
 
-			if ("Content-Length:".equalsIgnoreCase(token)) {
-				int length = Integer.parseInt(tokenizer.nextToken());
+      if ("Content-Length:".equalsIgnoreCase(token)) {
+        int length = Integer.parseInt(tokenizer.nextToken());
 
-				if (length > 0) {
-					request.parsePostData(tokenizer.nextToken());
-				}
-			}
-		}
+        if (length > 0) {
+          request.parsePostData(tokenizer.nextToken());
+        }
+      }
+    }
 
-		return request;
-	}
+    return request;
+  }
 
-	/**
-	 * Parse the headers of a request.
-	 *
-	 * @param data The data.
-	 *
-	 * @return The headers.
-	 */
-	private static Map<String, String> parseHeaders(String data) {
-		Map<String, String> headers = new HashMap<>();
-		String[] lines = data.split("\\n");
+  /**
+   * Parse the headers of a request.
+   *
+   * @param data The data.
+   * @return The headers.
+   */
+  private static Map<String, String> parseHeaders(String data) {
+    Map<String, String> headers = new HashMap<>();
+    String[] lines = data.split("\\n");
 
-		for (int i = 1; i < lines.length; i++) {
-			String line = lines[i];
-			String[] splitted = line.split(":", 2);
+    for (int i = 1; i < lines.length; i++) {
+      String line = lines[i];
+      String[] splitted = line.split(":", 2);
 
-			if (splitted.length != 2) {
-				continue;
-			}
+      if (splitted.length != 2) {
+        continue;
+      }
 
-			headers.put(splitted[0].trim(), splitted[1].trim());
-		}
+      headers.put(splitted[0].trim(), splitted[1].trim());
+    }
 
-		return headers;
-	}
+    return headers;
+  }
 }

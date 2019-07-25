@@ -31,61 +31,60 @@ import java.util.Map;
  */
 public class HTTPHeaders {
 
-	/**
-	 * Underlying Map.
-	 */
-	private Map<String, String> handle;
+  /**
+   * Underlying Map.
+   */
+  private Map<String, String> handle;
 
-	/**
-	 * Create headers by its data.
-	 *
-	 * @param handle The data.
-	 */
-	public HTTPHeaders(Map<String, String> handle) {
-		this.handle = handle;
-	}
+  /**
+   * Create headers by its data.
+   *
+   * @param handle The data.
+   */
+  public HTTPHeaders(Map<String, String> handle) {
+    this.handle = handle;
+  }
 
-	/**
-	 * Create empty header data.
-	 */
-	public HTTPHeaders() {
-		this(new HashMap<>());
-	}
+  /**
+   * Create empty header data.
+   */
+  public HTTPHeaders() {
+    this(new HashMap<>());
+  }
 
-	/**
-	 * Get the underlying data.
-	 *
-	 * @return The underlying data.
-	 */
-	public Map<String, String> getHandle() {
-		return handle;
-	}
+  /**
+   * Get the underlying data.
+   *
+   * @return The underlying data.
+   */
+  public Map<String, String> getHandle() {
+    return handle;
+  }
 
-	/**
-	 * Add a header property.
-	 *
-	 * @param name The name.
-	 * @param value The value.
-	 */
-	public void addHeader(String name, String value) {
-		this.handle.put(name, value);
-	}
+  /**
+   * Add a header property.
+   *
+   * @param name The name.
+   * @param value The value.
+   */
+  public void addHeader(String name, String value) {
+    this.handle.put(name, value);
+  }
 
-	/**
-	 * Get the value of a property.
-	 *
-	 * @param name The name.
-	 *
-	 * @return The value.
-	 */
-	public String getHeader(String name) {
-		return this.handle.get(name);
-	}
+  /**
+   * Get the value of a property.
+   *
+   * @param name The name.
+   * @return The value.
+   */
+  public String getHeader(String name) {
+    return this.handle.get(name);
+  }
 
-	@Override
-	public String toString() {
-		return "HTTPHeaders{" +
-			"handle=" + handle +
-			'}';
-	}
+  @Override
+  public String toString() {
+    return "HTTPHeaders{" +
+        "handle=" + handle +
+        '}';
+  }
 }

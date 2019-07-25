@@ -31,144 +31,144 @@ import java.util.Map;
  */
 public class HTTPRequest {
 
-	private static final String POST_DELIMETER = "&";
+  private static final String POST_DELIMETER = "&";
 
-	/**
-	 * The underlying raw data.
-	 */
-	private final String rawRequestData;
+  /**
+   * The underlying raw data.
+   */
+  private final String rawRequestData;
 
-	/**
-	 * The method of the request.
-	 */
-	private final HTTPMethod method;
+  /**
+   * The method of the request.
+   */
+  private final HTTPMethod method;
 
-	/**
-	 * Location of the resource.
-	 */
-	private final String location;
+  /**
+   * Location of the resource.
+   */
+  private final String location;
 
-	/**
-	 * The http version.
-	 */
-	private final String version;
+  /**
+   * The http version.
+   */
+  private final String version;
 
-	/**
-	 * The http headers.
-	 */
-	private final HTTPHeaders headers;
+  /**
+   * The http headers.
+   */
+  private final HTTPHeaders headers;
 
-	/**
-	 * Post data.
-	 */
-	private final Map<String, String> postData = new HashMap<>();
+  /**
+   * Post data.
+   */
+  private final Map<String, String> postData = new HashMap<>();
 
-	/**
-	 * Create a request based on all its data.
-	 *
-	 * @param rawRequestData The raw data.
-	 * @param method The method.
-	 * @param location The location.
-	 * @param version The version.
-	 * @param headers The headers.
-	 */
-	public HTTPRequest(String rawRequestData, HTTPMethod method, String location,
-		String version, HTTPHeaders headers) {
-		this.rawRequestData = rawRequestData;
-		this.method = method;
-		this.location = location;
-		this.version = version;
-		this.headers = headers;
-	}
+  /**
+   * Create a request based on all its data.
+   *
+   * @param rawRequestData The raw data.
+   * @param method The method.
+   * @param location The location.
+   * @param version The version.
+   * @param headers The headers.
+   */
+  public HTTPRequest(String rawRequestData, HTTPMethod method, String location,
+      String version, HTTPHeaders headers) {
+    this.rawRequestData = rawRequestData;
+    this.method = method;
+    this.location = location;
+    this.version = version;
+    this.headers = headers;
+  }
 
-	/**
-	 * Create a new builder.
-	 *
-	 * @return The builder.
-	 */
-	public static HTTPRequestBuilder newBuilder() {
-		return new HTTPRequestBuilder();
-	}
+  /**
+   * Create a new builder.
+   *
+   * @return The builder.
+   */
+  public static HTTPRequestBuilder newBuilder() {
+    return new HTTPRequestBuilder();
+  }
 
-	/**
-	 * Get the headers.
-	 *
-	 * @return The headers.
-	 */
-	public HTTPHeaders getHeaders() {
-		return headers;
-	}
+  /**
+   * Get the headers.
+   *
+   * @return The headers.
+   */
+  public HTTPHeaders getHeaders() {
+    return headers;
+  }
 
-	/**
-	 * Get the method.
-	 *
-	 * @return The method.
-	 */
-	public HTTPMethod getMethod() {
-		return method;
-	}
+  /**
+   * Get the method.
+   *
+   * @return The method.
+   */
+  public HTTPMethod getMethod() {
+    return method;
+  }
 
-	/**
-	 * Location of the resource.
-	 *
-	 * @return The location.
-	 */
-	public String getLocation() {
-		return location;
-	}
+  /**
+   * Location of the resource.
+   *
+   * @return The location.
+   */
+  public String getLocation() {
+    return location;
+  }
 
-	/**
-	 * Get the underlying raw data.
-	 *
-	 * @return The raw data.
-	 */
-	public String getRawRequestData() {
-		return rawRequestData;
-	}
+  /**
+   * Get the underlying raw data.
+   *
+   * @return The raw data.
+   */
+  public String getRawRequestData() {
+    return rawRequestData;
+  }
 
-	/**
-	 * Get the http version.
-	 *
-	 * @return The version.
-	 */
-	public String getVersion() {
-		return version;
-	}
+  /**
+   * Get the http version.
+   *
+   * @return The version.
+   */
+  public String getVersion() {
+    return version;
+  }
 
-	/**
-	 * Parse the post data of the request.
-	 *
-	 * @param postParameter The pastparam.
-	 */
-	public void parsePostData(String postParameter) {
-		String[] split = postParameter.split(POST_DELIMETER);
+  /**
+   * Parse the post data of the request.
+   *
+   * @param postParameter The pastparam.
+   */
+  public void parsePostData(String postParameter) {
+    String[] split = postParameter.split(POST_DELIMETER);
 
-		for (String splitElement : split) {
-			String[] params = splitElement.split("=");
-			if (params.length == 2) {
-				postData.put(params[0], params[1]);
-			}
-		}
-	}
+    for (String splitElement : split) {
+      String[] params = splitElement.split("=");
+      if (params.length == 2) {
+        postData.put(params[0], params[1]);
+      }
+    }
+  }
 
-	/**
-	 * Get all the post data.
-	 *
-	 * @return The data.
-	 */
-	public Map<String, String> getPostData() {
-		return postData;
-	}
+  /**
+   * Get all the post data.
+   *
+   * @return The data.
+   */
+  public Map<String, String> getPostData() {
+    return postData;
+  }
 
-	@Override
-	public String toString() {
-		return "HTTPRequest{" +
-			//"rawRequestData='" + rawRequestData + '\'' +
-			", method=" + method +
-			", location='" + location + '\'' +
-			", version='" + version + '\'' +
-			", headers=" + headers +
-			", postData=" + postData +
-			'}';
-	}
+  @Override
+  public String toString() {
+    return "HTTPRequest{" +
+        //"rawRequestData='" + rawRequestData + '\'' +
+        ", method=" + method +
+        ", location='" + location + '\'' +
+        ", version='" + version + '\'' +
+        ", headers=" + headers +
+        ", postData=" + postData +
+        '}';
+  }
 }

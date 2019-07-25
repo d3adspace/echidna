@@ -43,101 +43,98 @@ import java.util.stream.Collectors;
  */
 public class EchidnaClient {
 
-	/**
-	 * Local agent.
-	 */
-	private static final String AGENT = "Echidna Client Agent v1";
+  /**
+   * Local agent.
+   */
+  private static final String AGENT = "Echidna Client Agent v1";
 
-	/**
-	 * Offset for codec.
-	 */
-	private static final int BYTE_OUT_OFFSET = 0;
+  /**
+   * Offset for codec.
+   */
+  private static final int BYTE_OUT_OFFSET = 0;
 
-	/**
-	 * Perfrom a request to a server.
-	 *
-	 * @param url The url.
-	 * @param request The request.
-	 *
-	 * @return The response.
-	 */
-	public HTTPResponse request(URL url, HTTPRequest request, HTTPBody body) {
-		HttpURLConnection connection = this.createConnection(url, request, body);
-		byte[] bytes = this.readByteArray(connection);
+  /**
+   * Perfrom a request to a server.
+   *
+   * @param url The url.
+   * @param request The request.
+   * @return The response.
+   */
+  public HTTPResponse request(URL url, HTTPRequest request, HTTPBody body) {
+    HttpURLConnection connection = this.createConnection(url, request, body);
+    byte[] bytes = this.readByteArray(connection);
 
-		try {
-			Map<String, String> headers = connection.getHeaderFields().entrySet().stream()
-				.collect(Collectors.toMap(Entry::getKey,
-					p -> p.getValue().stream().collect(Collectors.joining(";"))));
+    try {
+      Map<String, String> headers = connection.getHeaderFields().entrySet().stream()
+          .collect(Collectors.toMap(Entry::getKey,
+              p -> p.getValue().stream().collect(Collectors.joining(";"))));
 
-			return HTTPResponse.newBuilder()
-				.setBody(new HTTPBody(bytes))
-				.setStatus(HTTPStatus.getByCode(connection.getResponseCode()))
-				.setHeaders(new HTTPHeaders(headers))
-				.createHTTPResponse();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+      return HTTPResponse.newBuilder()
+          .setBody(new HTTPBody(bytes))
+          .setStatus(HTTPStatus.getByCode(connection.getResponseCode()))
+          .setHeaders(new HTTPHeaders(headers))
+          .createHTTPResponse();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	/**
-	 * Read the bytes by a connection.
-	 *
-	 * @param connection The connection.
-	 *
-	 * @return The bytes as array.
-	 */
-	private byte[] readByteArray(HttpURLConnection connection) {
-		try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-			InputStream inputStream = connection.getInputStream()) {
+  /**
+   * Read the bytes by a connection.
+   *
+   * @param connection The connection.
+   * @return The bytes as array.
+   */
+  private byte[] readByteArray(HttpURLConnection connection) {
+    try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        InputStream inputStream = connection.getInputStream()) {
 
-			byte[] part = new byte[4096];
+      byte[] part = new byte[4096];
 
-			int i;
-			while ((i = inputStream.read(part)) > 0) {
-				byteArrayOutputStream.write(part, BYTE_OUT_OFFSET, i);
-			}
+      int i;
+      while ((i = inputStream.read(part)) > 0) {
+        byteArrayOutputStream.write(part, BYTE_OUT_OFFSET, i);
+      }
 
-			return byteArrayOutputStream.toByteArray();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+      return byteArrayOutputStream.toByteArray();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	/**
-	 * Open a new connection.
-	 *
-	 * @param url The url.
-	 * @param request The request.
-	 *
-	 * @return The connection.
-	 */
-	private HttpURLConnection createConnection(URL url, HTTPRequest request, HTTPBody body) {
-		HttpURLConnection connection = null;
-		try {
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setConnectTimeout(5);
-			connection.setRequestMethod(request.getMethod().name());
-			connection.setRequestProperty("User-Agent", AGENT);
-			connection.setDoOutput(true);
+  /**
+   * Open a new connection.
+   *
+   * @param url The url.
+   * @param request The request.
+   * @return The connection.
+   */
+  private HttpURLConnection createConnection(URL url, HTTPRequest request, HTTPBody body) {
+    HttpURLConnection connection = null;
+    try {
+      connection = (HttpURLConnection) url.openConnection();
+      connection.setConnectTimeout(5);
+      connection.setRequestMethod(request.getMethod().name());
+      connection.setRequestProperty("User-Agent", AGENT);
+      connection.setDoOutput(true);
 
-			if (body != null) {
-				try (DataOutputStream writer = new DataOutputStream(connection.getOutputStream())) {
-					writer.write(body.getHandle());
-				}
-			}
+      if (body != null) {
+        try (DataOutputStream writer = new DataOutputStream(connection.getOutputStream())) {
+          writer.write(body.getHandle());
+        }
+      }
 
-			for (Map.Entry<String, String> entry : request.getHeaders().getHandle().entrySet()) {
-				connection.setRequestProperty(entry.getKey(), entry.getValue());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+      for (Map.Entry<String, String> entry : request.getHeaders().getHandle().entrySet()) {
+        connection.setRequestProperty(entry.getKey(), entry.getValue());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-		return connection;
-	}
+    return connection;
+  }
 }
