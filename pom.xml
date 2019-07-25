@@ -41,8 +41,6 @@
   <modelVersion>4.0.0</modelVersion>
   <modules>
     <module>server</module>
-    <module>commons</module>
-    <module>example</module>
   </modules>
   <packaging>pom</packaging>
 
