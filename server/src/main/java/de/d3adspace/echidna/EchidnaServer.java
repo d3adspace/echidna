@@ -24,7 +24,7 @@ package de.d3adspace.echidna;
 /**
  * Basic Interface for all echidna servers.
  *
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public interface EchidnaServer {
 

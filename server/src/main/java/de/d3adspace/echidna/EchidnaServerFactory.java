@@ -26,7 +26,7 @@ import de.d3adspace.echidna.config.EchidnaConfig;
 /**
  * Factory for all server instances.
  *
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public class EchidnaServerFactory {
 

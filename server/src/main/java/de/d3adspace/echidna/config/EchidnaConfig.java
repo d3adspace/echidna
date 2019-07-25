@@ -24,7 +24,7 @@ package de.d3adspace.echidna.config;
 import java.util.List;
 
 /**
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public class EchidnaConfig {
 

@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Basic Server implementation.
  *
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public class SimpleEchidnaServer implements EchidnaServer {
 

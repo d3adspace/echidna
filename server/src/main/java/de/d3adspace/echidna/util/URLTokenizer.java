@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 /**
  * Utils class to split an url in their tokens.
  *
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public class URLTokenizer extends StringTokenizer {
 

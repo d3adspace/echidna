@@ -24,7 +24,7 @@ package de.d3adspace.echidna.util;
 /**
  * Utils to handle a few Strings.
  *
- * @author Felix 'SasukeKawaii' Klauke
+ * @author Felix Klauke (info@felix-klauke.de)
  */
 public class StringUtils {
 
