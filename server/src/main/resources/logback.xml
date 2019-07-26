@@ -34,7 +34,7 @@
     <encoder>
       <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
     </encoder>
-    <file>heimdall-server.log</file>
+    <file>echidna-server.log</file>
     <immediateFlush>true</immediateFlush>
   </appender>
 
