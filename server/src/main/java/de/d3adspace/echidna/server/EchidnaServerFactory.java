@@ -19,29 +19,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna;
+package de.d3adspace.echidna.server;
+
+import de.d3adspace.echidna.server.config.EchidnaConfig;
+import java.util.Objects;
 
 /**
- * Basic Interface for all echidna servers.
+ * Factory for all server instances.
  *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public interface EchidnaServer {
+public class EchidnaServerFactory {
 
   /**
-   * Start the server.
-   */
-  void start();
-
-  /**
-   * Stop the server.
-   */
-  void stop();
-
-  /**
-   * Check if the server is running.
+   * Create a new server based on a config.
    *
-   * @return The server state.
+   * @param config The config.
+   * @return The server.
    */
-  boolean isRunning();
+  public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
+    Objects.requireNonNull(config, "Config should not be null.");
+
+    return new SimpleEchidnaServer(config, resourceManager);
+  }
 }

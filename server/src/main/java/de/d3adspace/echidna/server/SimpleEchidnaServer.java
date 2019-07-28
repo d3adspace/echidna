@@ -19,10 +19,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna;
+package de.d3adspace.echidna.server;
 
-import de.d3adspace.echidna.config.EchidnaConfig;
-import de.d3adspace.echidna.resource.ResourceManager;
+import de.d3adspace.echidna.server.config.EchidnaConfig;
+import de.d3adspace.echidna.server.resource.ResourceManager;
 import de.d3adspace.mantikor.commons.HTTPRequest;
 import de.d3adspace.mantikor.commons.HTTPResponse;
 import de.d3adspace.mantikor.commons.HTTPResponseBuilder;

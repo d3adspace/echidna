@@ -19,18 +19,29 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna.annotation;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package de.d3adspace.echidna.server;
 
 /**
+ * Basic Interface for all echidna servers.
+ *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface PUT {
+public interface EchidnaServer {
 
+  /**
+   * Start the server.
+   */
+  void start();
+
+  /**
+   * Stop the server.
+   */
+  void stop();
+
+  /**
+   * Check if the server is running.
+   *
+   * @return The server state.
+   */
+  boolean isRunning();
 }

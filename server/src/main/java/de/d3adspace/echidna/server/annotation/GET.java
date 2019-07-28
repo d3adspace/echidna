@@ -19,23 +19,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna.util;
+package de.d3adspace.echidna.server.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Utils to handle a few Strings.
- *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public class StringUtils {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface GET {
 
-  /**
-   * Count the occurances of a single char in a string.
-   *
-   * @param pattern The pattern to search in.
-   * @param character The character to search for.
-   * @return The time the character is occuring
-   */
-  public static int countMatches(String pattern, String character) {
-    return pattern.length() - pattern.replace(character, "").length();
-  }
 }

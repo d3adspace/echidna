@@ -19,35 +19,18 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna.config;
+package de.d3adspace.echidna.server.annotation;
 
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public class EchidnaConfig {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface PATCH {
 
-  private final String serverHost;
-  private final int serverPort;
-  private final List<Object> resources;
-
-  public EchidnaConfig(String serverHost, int serverPort,
-      List<Object> resources) {
-    this.serverHost = serverHost;
-    this.serverPort = serverPort;
-    this.resources = resources;
-  }
-
-  public String getServerHost() {
-    return serverHost;
-  }
-
-  public int getServerPort() {
-    return serverPort;
-  }
-
-  public List<Object> getResourceClasses() {
-    return resources;
-  }
 }

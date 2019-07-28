@@ -19,27 +19,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna;
+package de.d3adspace.echidna.server.annotation;
 
-import de.d3adspace.echidna.config.EchidnaConfig;
-import java.util.Objects;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Factory for all server instances.
- *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public class EchidnaServerFactory {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)
+public @interface PostKey {
 
-  /**
-   * Create a new server based on a config.
-   *
-   * @param config The config.
-   * @return The server.
-   */
-  public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
-    Objects.requireNonNull(config, "Config should not be null.");
-
-    return new SimpleEchidnaServer(config, resourceManager);
-  }
+  String value();
 }

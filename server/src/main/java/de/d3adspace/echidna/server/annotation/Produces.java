@@ -19,23 +19,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package de.d3adspace.echidna.util;
+package de.d3adspace.echidna.server.annotation;
 
-import java.util.StringTokenizer;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Utils class to split an url in their tokens.
- *
  * @author Felix Klauke (info@felix-klauke.de)
  */
-public class URLTokenizer extends StringTokenizer {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Produces {
 
-  /**
-   * Create a new url tokenizer.
-   *
-   * @param str The url.
-   */
-  public URLTokenizer(String str) {
-    super(str, "/");
-  }
+  String value();
 }
