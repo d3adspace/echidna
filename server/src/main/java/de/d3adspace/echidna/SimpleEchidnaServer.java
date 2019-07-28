@@ -44,7 +44,7 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
   /**
    * Logger for server actions.
    */
-  private final Logger logger;
+  private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEchidnaServer.class);;
 
   /**
    * Config for the server.
@@ -62,14 +62,13 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
    * @param config The server config.
    * @param resourceManager The resource manager.
    */
-  public SimpleEchidnaServer(EchidnaConfig config,
+  SimpleEchidnaServer(EchidnaConfig config,
     ResourceManager resourceManager) {
     super(MantikorConfig.builder()
         .serverHost(config.getServerHost())
         .serverPort(config.getServerPort())
         .build());
     this.resourceManager = resourceManager;
-    this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
     this.config = config;
   }
 
@@ -78,17 +77,17 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
 
     super.start();
 
-    this.logger.info("Started the server on {}:{}.", this.config.getServerHost(),
+    LOGGER.info("Started the server on {}:{}.", this.config.getServerHost(),
         this.config.getServerPort());
   }
 
   @Override
   public void stop() {
-    this.logger.info("Server is going to stop.");
+    LOGGER.info("Server is going to stop.");
 
     super.stop();
 
-    this.logger.info("Server stopped.");
+    LOGGER.info("Server stopped.");
   }
 
   @Override
