@@ -40,6 +40,6 @@ public class EchidnaServerFactory {
   public static EchidnaServer createEchidnaServer(EchidnaConfig config) {
     Objects.requireNonNull(config, "Config should not be null.");
 
-    return new SimpleEchidnaServer(config);
+    return new SimpleEchidnaServer(config, resourceManager);
   }
 }

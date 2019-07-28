@@ -22,6 +22,7 @@
 package de.d3adspace.echidna;
 
 import de.d3adspace.echidna.config.EchidnaConfig;
+import de.d3adspace.echidna.resource.ResourceManager;
 import de.d3adspace.mantikor.commons.HTTPRequest;
 import de.d3adspace.mantikor.commons.HTTPResponse;
 import de.d3adspace.mantikor.commons.HTTPResponseBuilder;
@@ -51,15 +52,23 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
   private EchidnaConfig config;
 
   /**
+   * The resource manager.
+   */
+  private final ResourceManager resourceManager;
+
+  /**
    * Create a new Echidna server.
    *
    * @param config The server config.
+   * @param resourceManager The resource manager.
    */
-  public SimpleEchidnaServer(EchidnaConfig config) {
+  public SimpleEchidnaServer(EchidnaConfig config,
+    ResourceManager resourceManager) {
     super(MantikorConfig.builder()
         .serverHost(config.getServerHost())
         .serverPort(config.getServerPort())
         .build());
+    this.resourceManager = resourceManager;
     this.logger = LoggerFactory.getLogger(SimpleEchidnaServer.class);
     this.config = config;
   }
@@ -90,8 +99,6 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
 
     String path = uri.getPath();
     HTTPMethod method = requestLine.getMethod();
-
-
 
     return new HTTPResponseBuilder()
         .createHTTPResponse();
