@@ -25,6 +25,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>echidna-parent</artifactId>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -34,6 +38,7 @@
           <target>11</target>
         </configuration>
         <groupId>org.apache.maven.plugins</groupId>
+        <version>3.8.1</version>
       </plugin>
     </plugins>
   </build>
