@@ -12,7 +12,7 @@ Echidna is supposed to solve our problem of a missing simple and lightweight RES
 _Echidna:_
 ```xml
 <dependency>
-    <groupId>de.d3adspace</groupId>
+    <groupId>de.d3adspace.echidna</groupId>
     <artifactId>echidna-server</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>

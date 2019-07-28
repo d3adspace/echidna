@@ -64,7 +64,7 @@
 
   <parent>
     <artifactId>echidna-parent</artifactId>
-    <groupId>de.d3adspace</groupId>
+    <groupId>de.d3adspace.echidna</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
