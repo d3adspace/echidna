@@ -31,6 +31,7 @@ import de.d3adspace.mantikor.commons.codec.HTTPRequestLine;
 import de.d3adspace.mantikor.server.MantikorServer;
 import de.d3adspace.mantikor.server.config.MantikorConfig;
 import java.net.URI;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +45,8 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
   /**
    * Logger for server actions.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEchidnaServer.class);;
+  private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEchidnaServer.class);
+  ;
 
   /**
    * Config for the server.
@@ -65,9 +67,9 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
   SimpleEchidnaServer(EchidnaConfig config,
     ResourceManager resourceManager) {
     super(MantikorConfig.builder()
-        .serverHost(config.getServerHost())
-        .serverPort(config.getServerPort())
-        .build());
+      .serverHost(config.getServerHost())
+      .serverPort(config.getServerPort())
+      .build());
     this.resourceManager = resourceManager;
     this.config = config;
   }
@@ -75,10 +77,15 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
   @Override
   public void start() {
 
+    // Register initial resources
+    List<Object> resources = config.getResources();
+    LOGGER.info("Serving {} initial resources.", resources.size());
+    resources.forEach(resourceManager::registerResource);
+
     super.start();
 
-    LOGGER.info("Started the server on {}:{}.", this.config.getServerHost(),
-        this.config.getServerPort());
+    LOGGER.info("Started the server on {}:{}.", config.getServerHost(),
+      config.getServerPort());
   }
 
   @Override
@@ -100,7 +107,7 @@ public class SimpleEchidnaServer extends MantikorServer implements EchidnaServer
     HTTPMethod method = requestLine.getMethod();
 
     return new HTTPResponseBuilder()
-        .createHTTPResponse();
+      .createHTTPResponse();
   }
 
   @Override

@@ -47,7 +47,7 @@ public class EchidnaConfig {
     return serverPort;
   }
 
-  public List<Object> getResourceClasses() {
+  public List<Object> getResources() {
     return resources;
   }
 }
