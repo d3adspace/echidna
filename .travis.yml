@@ -1,0 +1,29 @@
+################
+### Language ###
+################
+language: java
+
+###########
+### JDK ###
+###########
+jdk:
+  - oraclejdk11
+
+###############
+### Caching ###
+###############
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+
+#####################
+### Notifications ###
+#####################
+notifications:
+  email: false
+
+####################
+### Build script ###
+####################
+script:
+  - mvn clean package
